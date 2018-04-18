@@ -32,7 +32,7 @@ public class TestBalanceo {
 	}
 
 	public static boolean testBalanceo(String cadena, int pos) {
-		if (pos == cadena.length()) { // se llego al final del string, entonces es balanceado
+		if (pos == cadena.length()) { // se llegó al final del string, entonces es balanceado
 			return true;
 		}
 		Character ch = cadena.charAt(pos);
