@@ -43,10 +43,9 @@ public class TestBalanceo {
 			if (esApertura(ch))
 				pila.apilar(ch);
 			else {
-				if (pila.tope() == aperturaDeCierre(ch))
-					pila.desapilar();
-				else
+				if (pila.tope() != aperturaDeCierre(ch))
 					return false;
+				pila.desapilar();
 			}
 		}
 		return cadena.length()>0;
