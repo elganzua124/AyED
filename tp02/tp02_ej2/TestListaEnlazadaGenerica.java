@@ -1,4 +1,4 @@
-package tp02_ejercicio2;
+package tp02_ej2;
 
 import tp01b_ej03.Estudiante;
 

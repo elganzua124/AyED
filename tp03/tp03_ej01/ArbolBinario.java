@@ -1,6 +1,6 @@
-package tp03_ejercicio1;
+package tp03_ej01;
 
-import tp02_ejercicio2.*; //revisar dependencia
+import tp02_ej2.*;
 public class ArbolBinario<T> {
 
 	private NodoBinario<T> raiz;
@@ -55,6 +55,10 @@ public class ArbolBinario<T> {
 
 	public boolean esHoja() {
 		return this.getDatoRaiz() != null && this.getHijoIzquierdo().esVacio() && this.getHijoDerecho().esVacio();
+	}
+	// Devuelve la cantidad de hojas del árbol receptor.
+	public int contarHojas() {
+		
 	}
 
 }

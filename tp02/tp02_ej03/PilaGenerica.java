@@ -1,6 +1,6 @@
 package tp02_ej03;
 
-import tp02_ejercicio2.ListaEnlazadaGenerica;
+import tp02_ej2.ListaEnlazadaGenerica;
 
 public class PilaGenerica<T> {
 
@@ -14,7 +14,7 @@ public class PilaGenerica<T> {
 	// Elimina y devuelve el elemento en el tope de la pila.
 	public T desapilar() {
 		T aux = this.tope();
-		boolean ok = datos.eliminar(this.tope());
+		boolean ok = datos.eliminarEn(1);
 		return (ok ? aux : null);
 	}
 

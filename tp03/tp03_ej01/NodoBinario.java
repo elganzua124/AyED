@@ -1,4 +1,4 @@
-package tp03_ejercicio1;
+package tp03_ej01;
 
 public class NodoBinario<T> {
 
@@ -13,7 +13,7 @@ public class NodoBinario<T> {
 	}
 	
 	public T getDato(){		
-		return this.dato; 
+		return this.dato;
 	}
 	
 	public NodoBinario<T> getHijoIzquierdo(){		
