@@ -29,10 +29,6 @@ public class TestBalanceo {
 		return ' ';
 	}
 
-	private static boolean esApertura(char caracter) {
-		return (caracter == '(' || caracter == '[' || caracter == '{');
-	}
-
 	private static boolean testBalanceo(String cadena) {
 		Character ch;
 		pila.apilar('\b'); /* para que pila.tope() no tire error
@@ -40,7 +36,7 @@ public class TestBalanceo {
 		que no es vacia sólo para ese caso es un despropósito.*/
 		for (int i=0;i < cadena.length();i++) {
 			ch = cadena.charAt(i);
-			if (esApertura(ch))
+			if (ch == '(' || ch == '[' || ch == '{')
 				pila.apilar(ch);
 			else {
 				if (pila.tope() != aperturaDeCierre(ch))
