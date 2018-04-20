@@ -35,11 +35,9 @@ public class TestBalanceo {
 			ch = cadena.charAt(i);
 			if (ch == '(' || ch == '[' || ch == '{')
 				pila.apilar(ch);
-			else {
-				if (pila.esVacia() || (pila.tope() != aperturaDeCierre(ch)))
-					return false;
-				pila.desapilar();
-			}
+			else if (pila.esVacia() || (pila.tope() != aperturaDeCierre(ch)))
+				return false;
+			pila.desapilar();
 		}
 		return cadena.length() > 0;
 	}
