@@ -37,23 +37,21 @@ public class TestBalanceo {
 	}
 
 	private static boolean testBalanceo(String cadena) {
-		boolean balanceado = true;
-		int pos = 0;
 		Character ch;
 		pila.apilar('\b'); /* para que pila.tope() no tire error
 		porque primer caracter no es de apertura. Evaluar siempre
 		que no es vacia sólo para ese caso es un despropósito.*/
-		while (pos < cadena.length() && balanceado) {
-			ch = cadena.charAt(pos++);
+		for (int i=0;i < cadena.length();i++) {
+			ch = cadena.charAt(i);
 			if (esApertura(ch))
 				pila.apilar(ch);
 			else {
 				if (pila.tope() == aperturaDeCierre(ch)) {
 					pila.desapilar();
 				} else
-					balanceado = false;
+					return false;
 			}
 		}
-		return balanceado;
+		return cadena.length()>0;
 	}
 }
