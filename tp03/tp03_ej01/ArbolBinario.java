@@ -61,31 +61,36 @@ public class ArbolBinario<T> {
 	public void imprimirPostOrden() {
 		imprimirPostOrden(this);
 	}
-	
-	private void imprimirPostOrden(ArbolBinario<T> arbol){
-		if(!arbol.getHijoIzquierdo().esVacio()){
+
+	private void imprimirPostOrden(ArbolBinario<T> arbol) {
+		if (!arbol.getHijoIzquierdo().esVacio()) {
 			imprimirPostOrden(arbol.getHijoIzquierdo());
 		}
-		if(!arbol.getHijoDerecho().esVacio()){
+		if (!arbol.getHijoDerecho().esVacio()) {
 			imprimirPostOrden(arbol.getHijoDerecho());
 		}
-		if(arbol.getDatoRaiz() != null){
+		if (arbol.getHijoIzquierdo().esVacio() || arbol.getHijoDerecho().esVacio())
+			System.out.println("soy hoja");
+		if (arbol.getDatoRaiz() != null) {
 			System.out.println(arbol.getDatoRaiz());
 		}
 	}
-	
+
 	public int contarHojas() {
 		return contarHojas(this);
 	}
 
 	// Devuelve la cantidad de hojas del árbol receptor.
 	private int contarHojas(ArbolBinario<T> arbol) {
+
+		if (this.esHoja())
+			return 1;
 		int hojas = 0;
 		if (!arbol.getHijoIzquierdo().esVacio())
-			hojas = arbol.contarHojas();
+			hojas = arbol.getHijoIzquierdo().contarHojas();
 		if (!arbol.getHijoDerecho().esVacio())
-			hojas = hojas + arbol.contarHojas();
-		return hojas + 1;
+			hojas = hojas + arbol.getHijoDerecho().contarHojas();
+		return hojas;
 	}
 
 }
