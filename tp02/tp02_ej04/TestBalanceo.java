@@ -13,7 +13,7 @@ public class TestBalanceo {
 		System.out.format("Escriba una cadena %n(escriba 'salir' para salir): ");
 		String cadena = sc.nextLine();
 		while (!cadena.equals("salir")) {
-			System.out.println((testBalanceo(cadena)?"Es":"No es")+" balanceado.");
+			System.out.println((testBalanceo(cadena) ? "Es" : "No es") + " balanceado.");
 			System.out.format("Escriba una cadena %n(escriba 'salir' para salir): ");
 			cadena = sc.nextLine();
 		}
@@ -31,19 +31,16 @@ public class TestBalanceo {
 
 	private static boolean testBalanceo(String cadena) {
 		Character ch;
-		pila.apilar('\b'); /* para que pila.tope() no tire error
-		porque primer caracter no es de apertura. Evaluar siempre
-		que no es vacia sólo para ese caso es un despropósito.*/
-		for (int i=0;i < cadena.length();i++) {
+		for (int i = 0; i < cadena.length(); i++) {
 			ch = cadena.charAt(i);
 			if (ch == '(' || ch == '[' || ch == '{')
 				pila.apilar(ch);
 			else {
-				if (pila.tope() != aperturaDeCierre(ch))
+				if (pila.esVacia() || (pila.tope() != aperturaDeCierre(ch)))
 					return false;
 				pila.desapilar();
 			}
 		}
-		return cadena.length()>0;
+		return cadena.length() > 0;
 	}
 }

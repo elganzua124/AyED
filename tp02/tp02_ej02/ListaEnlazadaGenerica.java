@@ -1,4 +1,4 @@
-package tp02_ej2;
+package tp02_ej02;
 
 /**
  * La clase ListaGenericaEnlazada es una ListaGenerica, donde los elementos de

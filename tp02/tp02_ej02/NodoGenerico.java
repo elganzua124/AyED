@@ -1,4 +1,4 @@
-package tp02_ej2;
+package tp02_ej02;
 /**
  * Esta clase representa un nodo de la lista enlazada.
  * */

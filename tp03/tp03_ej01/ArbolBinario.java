@@ -1,6 +1,6 @@
 package tp03_ej01;
 
-import tp02_ej2.*;
+import tp02_ej02.*;
 public class ArbolBinario<T> {
 
 	private NodoBinario<T> raiz;
