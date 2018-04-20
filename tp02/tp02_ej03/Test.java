@@ -1,8 +1,5 @@
 package tp02_ej03;
 
-//import tp02_ejercicio2.TestListaEnlazadaGenerica;
-//prueba
-
 public class Test {
 
 	private static PilaGenerica<Integer> pila = new PilaGenerica<Integer>();
@@ -12,12 +9,11 @@ public class Test {
 		System.out.println("Pila test");
 		pila.apilar(3);
 		pila.apilar(2);
-		System.out.format("Tope de pila: %d%n" , pila.tope());
-		System.out.println("Pila test");
-		pila.apilar(3);
-		pila.apilar(2);
-		System.out.format("Tope de pila: %d%n" , cola.tope()); // revisar clase cola
-		
+		System.out.format("Tope de pila: %d%n", pila.tope());
+		System.out.println("Cola test");
+		cola.encolar(3);
+		cola.encolar(2);
+		System.out.format("Frente de cola: %d%n", cola.frente());
 	}
 
 }

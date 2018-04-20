@@ -1,6 +1,7 @@
 package tp03_ej01;
 
 import tp02_ej02.*;
+
 public class ArbolBinario<T> {
 
 	private NodoBinario<T> raiz;
@@ -56,9 +57,35 @@ public class ArbolBinario<T> {
 	public boolean esHoja() {
 		return this.getDatoRaiz() != null && this.getHijoIzquierdo().esVacio() && this.getHijoDerecho().esVacio();
 	}
-	// Devuelve la cantidad de hojas del árbol receptor.
+
+	public void imprimirPostOrden() {
+		imprimirPostOrden(this);
+	}
+	
+	private void imprimirPostOrden(ArbolBinario<T> arbol){
+		if(!arbol.getHijoIzquierdo().esVacio()){
+			imprimirPostOrden(arbol.getHijoIzquierdo());
+		}
+		if(!arbol.getHijoDerecho().esVacio()){
+			imprimirPostOrden(arbol.getHijoDerecho());
+		}
+		if(arbol.getDatoRaiz() != null){
+			System.out.println(arbol.getDatoRaiz());
+		}
+	}
+	
 	public int contarHojas() {
-		
+		return contarHojas(this);
+	}
+
+	// Devuelve la cantidad de hojas del árbol receptor.
+	private int contarHojas(ArbolBinario<T> arbol) {
+		int hojas = 0;
+		if (!arbol.getHijoIzquierdo().esVacio())
+			hojas = arbol.contarHojas();
+		if (!arbol.getHijoDerecho().esVacio())
+			hojas = hojas + arbol.contarHojas();
+		return hojas + 1;
 	}
 
 }
