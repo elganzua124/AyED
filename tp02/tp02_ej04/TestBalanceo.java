@@ -13,10 +13,7 @@ public class TestBalanceo {
 		System.out.format("Escriba una cadena %n(escriba 'salir' para salir): ");
 		String cadena = sc.nextLine();
 		while (!cadena.equals("salir")) {
-			if (testBalanceo(cadena))
-				System.out.println("Es balanceado.");
-			else
-				System.out.println("No es balanceado.");
+			System.out.println((testBalanceo(cadena)?"Es":"No es")+" balanceado.");
 			System.out.format("Escriba una cadena %n(escriba 'salir' para salir): ");
 			cadena = sc.nextLine();
 		}
