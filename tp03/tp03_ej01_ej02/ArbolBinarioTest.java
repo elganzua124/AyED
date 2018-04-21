@@ -1,4 +1,4 @@
-package tp03_ej01;
+package tp03_ej01_ej02;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
