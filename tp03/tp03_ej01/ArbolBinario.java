@@ -119,6 +119,13 @@ public class ArbolBinario<T> {
 		return arbol;
 	}
 
+	// ##### https://stackoverflow.com/a/27153988 ####
+	
+	@Override
+	public String toString() {
+		return this.toString(new StringBuilder(), true, new StringBuilder()).toString();
+	}
+	
 	private StringBuilder toString(StringBuilder prefix, boolean isTail, StringBuilder sb) {
 		if (!this.getHijoDerecho().esVacio()) {
 			this.getHijoDerecho().toString(new StringBuilder().append(prefix).append(isTail ? "│   " : "    "), false,
@@ -132,9 +139,7 @@ public class ArbolBinario<T> {
 		return sb;
 	}
 
-	@Override
-	public String toString() {
-		return this.toString(new StringBuilder(), true, new StringBuilder()).toString();
-	}
+	// ###############################################
 
+	
 }
