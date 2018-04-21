@@ -6,8 +6,6 @@ import java.util.Scanner;
 
 public class TestBalanceo {
 
-	private static PilaGenerica<Character> pila = new PilaGenerica<Character>();
-
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
 		System.out.format("Escriba una cadena %n(escriba 'salir' para salir): ");
@@ -30,15 +28,18 @@ public class TestBalanceo {
 	}
 
 	private static boolean testBalanceo(String cadena) {
+		PilaGenerica<Character> pila = new PilaGenerica<Character>();
 		Character ch;
 		for (int i = 0; i < cadena.length(); i++) {
 			ch = cadena.charAt(i);
 			if (ch == '(' || ch == '[' || ch == '{')
 				pila.apilar(ch);
-			else if (pila.esVacia() || (pila.tope() != aperturaDeCierre(ch)))
-				return false;
-			pila.desapilar();
+			else {
+				if (pila.esVacia() || (pila.tope() != aperturaDeCierre(ch)))
+					return false;
+				pila.desapilar();
+			}
 		}
-		return cadena.length() > 0;
+		return ( pila.esVacia() && (cadena.length() > 0) );
 	}
 }
