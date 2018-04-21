@@ -82,7 +82,6 @@ public class ArbolBinario<T> {
 
 	// Devuelve la cantidad de hojas del árbol receptor.
 	private int contarHojas(ArbolBinario<T> arbol) {
-
 		if (this.esHoja())
 			return 1;
 		int hojas = 0;
@@ -91,6 +90,51 @@ public class ArbolBinario<T> {
 		if (!arbol.getHijoDerecho().esVacio())
 			hojas = hojas + arbol.getHijoDerecho().contarHojas();
 		return hojas;
+	}
+
+	public ArbolBinario<T> espejo() {
+		return espejo(this);
+	}
+
+	private ArbolBinario<T> espejo(ArbolBinario<T> arbol) {
+
+		ArbolBinario<T> oldIzq = arbol.getHijoIzquierdo();
+
+		if (!arbol.getHijoIzquierdo().esVacio()) {
+			if (!arbol.getHijoDerecho().esVacio()) {
+				arbol.agregarHijoIzquierdo(arbol.getHijoDerecho().espejo());
+			} else
+				arbol.eliminarHijoIzquierdo();
+		}
+		if (!arbol.getHijoDerecho().esVacio()) {
+			if (oldIzq.getRaiz() != null)
+				arbol.agregarHijoDerecho(oldIzq.espejo());
+			else {
+				arbol.agregarHijoIzquierdo(arbol.getHijoDerecho().espejo());
+				arbol.eliminarHijoDerecho();
+			}
+		} else if (oldIzq.getRaiz() != null)
+			arbol.agregarHijoDerecho(oldIzq.espejo());
+
+		return arbol;
+	}
+
+	private StringBuilder toString(StringBuilder prefix, boolean isTail, StringBuilder sb) {
+		if (!this.getHijoDerecho().esVacio()) {
+			this.getHijoDerecho().toString(new StringBuilder().append(prefix).append(isTail ? "│   " : "    "), false,
+					sb);
+		}
+		sb.append(prefix).append(isTail ? "└── " : "┌── ").append(this.getRaiz().getDato().toString()).append("\n");
+		if (!this.getHijoIzquierdo().esVacio()) {
+			this.getHijoIzquierdo().toString(new StringBuilder().append(prefix).append(isTail ? "    " : "│   "), true,
+					sb);
+		}
+		return sb;
+	}
+
+	@Override
+	public String toString() {
+		return this.toString(new StringBuilder(), true, new StringBuilder()).toString();
 	}
 
 }
