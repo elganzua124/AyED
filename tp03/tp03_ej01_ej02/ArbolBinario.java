@@ -80,7 +80,7 @@ public class ArbolBinario<T> {
 		return contarHojas(this);
 	}
 
-	// Devuelve la cantidad de hojas del Ã¡rbol receptor.
+	// Devuelve la cantidad de hojas del árbol receptor.
 	private int contarHojas(ArbolBinario<T> arbol) {
 		if (this.esHoja())
 			return 1;
