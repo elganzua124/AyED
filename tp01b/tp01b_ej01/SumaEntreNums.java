@@ -27,7 +27,7 @@ public class SumaEntreNums {
 		System.out.print(suma + "\n");
 	}
 
-	public static void sumaEntreNums3(int num1, int num2) {
+	public static void sumaEntreNums3(int num1, int num2) { // TODO: no usar array
 		int[] intArray = { num1, num2 };
 		Arrays.sort(intArray);
 		int suma = (intArray[0] + intArray[1]) * (intArray[1] - intArray[0] + 1) / 2;
