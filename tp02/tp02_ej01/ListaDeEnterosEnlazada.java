@@ -1,12 +1,11 @@
 package tp02_ej01;
 
-
 public class ListaDeEnterosEnlazada extends ListaDeEnteros {
 	private NodoEntero inicio;
 	private NodoEntero actual;
 	private NodoEntero fin;
 
-	private int tamanio=0;
+	private int tamanio = 0;
 
 	@Override
 	public void comenzar() {
@@ -45,24 +44,24 @@ public class ListaDeEnterosEnlazada extends ListaDeEnteros {
 		if (pos == 1) {
 			aux.setSiguiente(inicio);
 			inicio = aux;
-			//si es el primer elemento acomodo fin
-			if (tamanio==1){
-				fin=inicio;
+			// si es el primer elemento acomodo fin
+			if (tamanio == 1) {
+				fin = inicio;
 			}
 		} else {
 			NodoEntero n = this.inicio;
 			NodoEntero ant = null;
 			int posActual = 1;
-			while (!(n == null) && (posActual < pos)) {
+			while ((n != null) && (posActual < pos)) {
 				ant = n;
 				n = n.getSiguiente();
 				posActual++;
 			}
 			aux.setSiguiente(n);
 			ant.setSiguiente(aux);
-			//Nuevo
-			if (aux.getSiguiente()==null)
-				fin=aux;
+			// Nuevo
+			if (aux.getSiguiente() == null)
+				fin = aux;
 		}
 		return true;
 	}
@@ -73,26 +72,25 @@ public class ListaDeEnterosEnlazada extends ListaDeEnteros {
 		return true;
 	}
 
-
 	@Override
 	public boolean eliminar(Integer elem) {
 		NodoEntero n = this.inicio;
 		NodoEntero ant = null;
-		while ((n != null) && (!n.getDato().equals(elem))) {
+		while ((n != null) && !(n.getDato().equals(elem))) {
 			ant = n;
 			n = n.getSiguiente();
 		}
 		if (n == null)
 			return false;
-		else {
-			if (ant == null)
-				this.inicio = this.inicio.getSiguiente();
-			else
-				ant.setSiguiente(n.getSiguiente());
-			this.tamanio--;
-			
-			return true;
-		}
+
+		if (ant == null) // el primer elemento hay que eliminar
+			this.inicio = this.inicio.getSiguiente();
+		else
+			ant.setSiguiente(n.getSiguiente());
+		this.tamanio--;
+
+		return true;
+
 	}
 
 	@Override
@@ -106,15 +104,15 @@ public class ListaDeEnterosEnlazada extends ListaDeEnteros {
 		}
 		NodoEntero n = this.inicio;
 		NodoEntero ant = null;
-		while (!(n == null) && (pos > 1)) {
+		while ((n != null) && (pos > 1)) {
 			pos--;
 			ant = n;
 			n = n.getSiguiente();
 		}
 		ant.setSiguiente(n.getSiguiente());
-		//Nuevo
-		if (ant.getSiguiente()==null)
-			fin=ant;
+		// Nuevo
+		if (ant.getSiguiente() == null)
+			fin = ant;
 		return true;
 	}
 
@@ -129,11 +127,10 @@ public class ListaDeEnterosEnlazada extends ListaDeEnteros {
 		aux.setDato(elem);
 		if (inicio == null) {
 			inicio = aux;
-			fin = aux;
 		} else {
 			fin.setSiguiente(aux);
-			fin = aux;
 		}
+		fin = aux;
 		tamanio++;
 		return true;
 	}
@@ -141,9 +138,9 @@ public class ListaDeEnterosEnlazada extends ListaDeEnteros {
 	@Override
 	public boolean incluye(Integer elem) {
 		NodoEntero n = this.inicio;
-		while (!(n == null) && !(n.getDato().equals(elem)))
+		while ((n != null) && !(n.getDato().equals(elem)))
 			n = n.getSiguiente();
-		return !(n == null);
+		return (n != null);
 	}
 
 	@Override

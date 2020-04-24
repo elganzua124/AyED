@@ -25,17 +25,22 @@ public class ListaDeEnterosConArreglos extends ListaDeEnteros {
 		return datos[pos - 1];
 	}
 
+
 	@Override
 	// Se considera pos 1 al indice 0
 	public boolean agregarEn(Integer elem, int pos) {
 		if (pos < 1 || pos > tamanio + 1 || pos > datos.length
-				|| tamanio == datos.length)
+				|| estaLleno())
 			return false;
 		tamanio++;
 		for (int i = tamanio - 1; i >= pos; i--)
 			datos[i] = datos[i - 1];
 		datos[pos - 1] = elem;
 		return true;
+	}
+
+	private boolean estaLleno() {
+		return tamanio == datos.length;
 	}
 
 	@Override
