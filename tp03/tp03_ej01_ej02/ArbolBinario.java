@@ -1,6 +1,6 @@
 package tp03_ej01_ej02;
 
-import tp02_ej02.*;
+import tp02.ej02.*;
 
 public class ArbolBinario<T> {
 
@@ -125,10 +125,11 @@ public class ArbolBinario<T> {
 			this.getHijoDerecho().toString(new StringBuilder().append(prefix).append(isTail ? "│   " : "    "), false,
 					sb);
 		}
-		sb.append(prefix).append(isTail ? "└── " : "┌── ").append(this.getRaiz().getDato().toString()).append("\n");
+		sb.append(prefix).append(isTail ? "└── " : "┌── ").append(this.getRaiz().getDato().toString())
+				.append("\n");
 		if (!this.getHijoIzquierdo().esVacio()) {
-			this.getHijoIzquierdo().toString(new StringBuilder().append(prefix).append(isTail ? "    " : "│   "), true,
-					sb);
+			this.getHijoIzquierdo().toString(new StringBuilder().append(prefix).append(isTail ? "    " : "│   "),
+					true, sb);
 		}
 		return sb;
 	}
