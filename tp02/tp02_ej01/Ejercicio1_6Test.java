@@ -1,5 +1,10 @@
 package tp02_ej01;
 
+/* Ej. 1.6 b)
+ * b) Escriba un método main que pruebe el método implementado en a)
+ * y recorra la lista resultado e imprima cada uno de los elementos.
+*/
+
 public class Ejercicio1_6Test {
 
 	public static void main(String[] args) {
