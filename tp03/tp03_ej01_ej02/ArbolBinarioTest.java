@@ -152,8 +152,9 @@ public class ArbolBinarioTest {
 
 	@Test
 	public void conteoHojas() {
+		System.out.println("Conteo de hojas");
 		arbolBinarioA.imprimirPostOrden();
-		assertEquals(Integer.valueOf(arbolBinarioA.contarHojas()), Integer.valueOf(4));
+		assertEquals(Integer.valueOf(arbolBinarioA.contarHojasInOrden()), Integer.valueOf(4));
 	}
 
 	@Test

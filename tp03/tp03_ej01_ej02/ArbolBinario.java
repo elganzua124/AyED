@@ -80,6 +80,17 @@ public class ArbolBinario<T> {
 		return contarHojas(this);
 	}
 
+	public int contarHojasInOrden() {
+		return contarHojasInOrden(this);
+	}
+
+	public int contarHojasInOrden(ArbolBinario<T> arbol) {
+
+		return (arbol.getHijoIzquierdo().esVacio() ? 0 : arbol.getHijoIzquierdo().contarHojasInOrden())
+				+ (arbol.esHoja() ? 1 : 0)
+				+ (arbol.getHijoDerecho().esVacio() ? 0 : arbol.getHijoDerecho().contarHojasInOrden());
+	}
+
 	// Devuelve la cantidad de hojas del árbol receptor.
 	private int contarHojas(ArbolBinario<T> arbol) {
 		if (this.esHoja())
