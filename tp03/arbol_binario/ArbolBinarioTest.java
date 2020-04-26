@@ -1,4 +1,4 @@
-package tp03_ej01_ej02;
+package arbol_binario;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -151,11 +151,13 @@ public class ArbolBinarioTest {
 	}
 
 	@Test
-	public void conteoHojas() {
+	public void testConteoHojas() {
 		System.out.println("Conteo de hojas");
+		System.out.println(arbolBinarioA.toString());
 		arbolBinarioA.imprimirPostOrden();
 		assertEquals(Integer.valueOf(arbolBinarioA.contarHojasInOrden()), Integer.valueOf(4));
 	}
+
 
 	@Test
 	public void testFrontera() {

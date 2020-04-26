@@ -1,4 +1,4 @@
-package tp03_ej01_ej02;
+package arbol_binario;
 
 public class ArbolBinarioPrintTest {
 
@@ -78,39 +78,38 @@ public class ArbolBinarioPrintTest {
 		
 		// ---- Comienzo de tests de espejo de arboles ----
 		
+		System.out.println("###########################");
+		System.out.println("# Test de arboles espejos #");
+		System.out.println("###########################");
+		System.out.println("");
+		
 		System.out.println(arbolBinarioA.toString());
-		arbolBinarioA.espejo();
-		System.out.println(arbolBinarioA.toString());
+		System.out.println(arbolBinarioA.espejo().toString());
 
 		System.out.println("-----------------------");
 
 		System.out.println(arbolBinarioB.toString());
-		arbolBinarioB.espejo();
+		System.out.println(arbolBinarioB.espejo().toString());
 		System.out.println(arbolBinarioB.toString());
-
 		System.out.println("-----------------------");
 
 		System.out.println(arbolBinarioC.toString());
-		arbolBinarioC.espejo();
-		System.out.println(arbolBinarioC.toString());
+		System.out.println(arbolBinarioC.espejo().toString());
 
 		System.out.println("-----------------------");
 
 		System.out.println(arbolBinarioD.toString());
-		arbolBinarioD.espejo();
-		System.out.println(arbolBinarioD.toString());
+		System.out.println(arbolBinarioD.espejo().toString());
 
 		System.out.println("-----------------------");
 
 		System.out.println(arbolBinarioE.toString());
-		arbolBinarioE.espejo();
-		System.out.println(arbolBinarioE.toString());
+		System.out.println(arbolBinarioE.espejo().toString());
 
 		System.out.println("-----------------------");
 
 		System.out.println(arbolBinarioF.toString());
-		arbolBinarioF.espejo();
-		System.out.println(arbolBinarioF.toString());
+		System.out.println(arbolBinarioF.espejo().toString());
 
 		// ----- Fin de tests de espejo de arboles -----
 		

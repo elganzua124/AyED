@@ -1,4 +1,4 @@
-package tp02.ej01;
+package lista_enteros;
 
 public class NodoEntero {
 	private Integer dato;

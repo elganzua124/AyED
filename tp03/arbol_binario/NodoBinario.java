@@ -1,4 +1,4 @@
-package tp03_ej01_ej02;
+package arbol_binario;
 
 public class NodoBinario<T> {
 

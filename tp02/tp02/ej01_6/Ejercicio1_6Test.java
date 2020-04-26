@@ -1,7 +1,9 @@
-package tp02.ej01;
+package tp02.ej01_6;
+
+import lista_enteros.ListaDeEnterosEnlazada;
 
 /* Ej. 1.6 b)
- * b) Escriba un método main que pruebe el método implementado en a)
+ * Escriba un mï¿½todo main que pruebe el mï¿½todo implementado en a)
  * y recorra la lista resultado e imprima cada uno de los elementos.
 */
 

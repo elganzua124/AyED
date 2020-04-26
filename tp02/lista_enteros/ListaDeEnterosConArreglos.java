@@ -1,4 +1,4 @@
-package tp02.ej01;
+package lista_enteros;
 
 public class ListaDeEnterosConArreglos extends ListaDeEnteros {
 	private int tamanio;

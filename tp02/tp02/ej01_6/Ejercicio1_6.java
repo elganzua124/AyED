@@ -1,9 +1,10 @@
-package tp02.ej01;
+package tp02.ej01_6;
 
+import lista_enteros.ListaDeEnterosEnlazada;
 
-/* Ej.1.6 a)
- * Escriba un programa recursivo que, a partir de un número n,
- * devuelva una lista con cada miembro de la sucesión.
+/* Ej. 1.6 a)
+ * Escriba un programa recursivo que, a partir de un nÃºmero n,
+ * devuelva una lista con cada miembro de la sucesiÃ³n.
 */
 
 

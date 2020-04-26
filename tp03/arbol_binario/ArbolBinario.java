@@ -1,4 +1,4 @@
-package tp03_ej01_ej02;
+package arbol_binario;
 
 import tp02.ej02.*;
 
@@ -76,22 +76,13 @@ public class ArbolBinario<T> {
 		}
 	}
 
+	// ############### Ejercicio 2 de TP 3 ########################
+
+	// Ej.2 a) Devuelve la cantidad de árbol/subárbol hojas del árbol receptor.
 	public int contarHojas() {
 		return contarHojas(this);
 	}
 
-	public int contarHojasInOrden() {
-		return contarHojasInOrden(this);
-	}
-
-	public int contarHojasInOrden(ArbolBinario<T> arbol) {
-
-		return (arbol.getHijoIzquierdo().esVacio() ? 0 : arbol.getHijoIzquierdo().contarHojasInOrden())
-				+ (arbol.esHoja() ? 1 : 0)
-				+ (arbol.getHijoDerecho().esVacio() ? 0 : arbol.getHijoDerecho().contarHojasInOrden());
-	}
-
-	// Devuelve la cantidad de hojas del �rbol receptor.
 	private int contarHojas(ArbolBinario<T> arbol) {
 		if (this.esHoja())
 			return 1;
@@ -103,28 +94,55 @@ public class ArbolBinario<T> {
 		return hojas;
 	}
 
+	// version InOrden
+	public int contarHojasInOrden() {
+		return contarHojasInOrden(this);
+	}
+
+	public int contarHojasInOrden(ArbolBinario<T> arbol) {
+
+		return (arbol.getHijoIzquierdo().esVacio() ? 0 : arbol.getHijoIzquierdo().contarHojasInOrden())
+				+ (arbol.esHoja() ? 1 : 0)
+				+ (arbol.getHijoDerecho().esVacio() ? 0 : arbol.getHijoDerecho().contarHojasInOrden());
+	}
+
+	// Ej.2 b) Devuelve el árbol binario espejo del árbol receptor.
 	public ArbolBinario<T> espejo() {
 		return espejo(this);
 	}
 
 	private ArbolBinario<T> espejo(ArbolBinario<T> arbol) {
+		ArbolBinario<T> espejo = new ArbolBinario<T>(arbol.getDatoRaiz());
 		if (!arbol.getHijoIzquierdo().esVacio()) {
 			if (!arbol.getHijoDerecho().esVacio()) {
-				ArbolBinario<T> oldIzq = arbol.getHijoIzquierdo();
-				arbol.agregarHijoIzquierdo(arbol.getHijoDerecho().espejo());
-				arbol.agregarHijoDerecho(oldIzq.espejo());
-			} else {
-				arbol.agregarHijoDerecho(arbol.getHijoIzquierdo().espejo());
-				arbol.eliminarHijoIzquierdo();
-			}
-		} else if (!arbol.getHijoDerecho().esVacio()) {
-			arbol.agregarHijoIzquierdo(arbol.getHijoDerecho().espejo());
-			arbol.eliminarHijoDerecho();
-		}
-		return arbol;
+				espejo.agregarHijoIzquierdo(arbol.getHijoDerecho().espejo());
+				espejo.agregarHijoDerecho(arbol.getHijoIzquierdo().espejo());
+			} else
+				espejo.agregarHijoDerecho(arbol.getHijoIzquierdo().espejo());
+
+		} else if (!arbol.getHijoDerecho().esVacio())
+			espejo.agregarHijoIzquierdo(arbol.getHijoDerecho().espejo());
+
+		return espejo;
 	}
 
+	/*  Ej.2 c)  Imprime el recorrido por niveles de los elementos del árbol
+	receptor entre los niveles n y m (ambos inclusive). (0 <= n < m <= altura del árbol) */
+	
+	public void entreNiveles(int n, int m) {
+		
+	}
+	
+	// ############### Fin ejercicio 2 de TP 3 ####################
+
 	// ##### https://stackoverflow.com/a/27153988 ####
+
+	/*
+	 * Si en la consola de Eclipse aparecen ??? hay que: Change Encoding Globally If
+	 * we want to change the text encoding globally, we can open Window ->
+	 * Preferences -> General -> Workspace. Change the Text file encoding from
+	 * default Cp1252 to UTF-8.
+	 */
 
 	@Override
 	public String toString() {
@@ -136,11 +154,10 @@ public class ArbolBinario<T> {
 			this.getHijoDerecho().toString(new StringBuilder().append(prefix).append(isTail ? "│   " : "    "), false,
 					sb);
 		}
-		sb.append(prefix).append(isTail ? "└── " : "┌── ").append(this.getRaiz().getDato().toString())
-				.append("\n");
+		sb.append(prefix).append(isTail ? "└── " : "┌── ").append(this.getRaiz().getDato().toString()).append("\n");
 		if (!this.getHijoIzquierdo().esVacio()) {
-			this.getHijoIzquierdo().toString(new StringBuilder().append(prefix).append(isTail ? "    " : "│   "),
-					true, sb);
+			this.getHijoIzquierdo().toString(new StringBuilder().append(prefix).append(isTail ? "    " : "│   "), true,
+					sb);
 		}
 		return sb;
 	}

@@ -1,8 +1,8 @@
-package tp02.ej01;
+package lista_enteros;
 
 /* Ej. 1.2.
  * Escriba una clase llamada TestListaDeEnterosConArreglos que reciba en su
- * método main una secuencia de números, los agregue a un objeto de tipo
+ * mï¿½todo main una secuencia de nï¿½meros, los agregue a un objeto de tipo
  * ListaDeEnterosConArreglos y luego imprima los elementos de dicha lista.
  * */
 
@@ -14,11 +14,11 @@ public class TestListaDeEnterosConArreglos {
 		ListaDeEnterosConArreglos lista = new ListaDeEnterosConArreglos();
 		lista.comenzar();
 		Scanner consola = new Scanner(System.in);
-		System.out.print("Por favor, ingrese un número: ");
+		System.out.print("Por favor, ingrese un nï¿½mero: ");
 		int num = consola.nextInt();
 		while (num != 0) {
 			lista.agregarFinal(num);
-			System.out.print("Por favor, ingrese un número: ");
+			System.out.print("Por favor, ingrese un nï¿½mero: ");
 			num = consola.nextInt();
 		}
 		System.out.println("Contenido de lista: ");

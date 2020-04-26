@@ -1,7 +1,7 @@
 package tp02.ej02;
 
 /**
- * La clase ListaGenericaEnlazada es una ListaGenerica, donde los elementos de
+ * La clase ListaEnlazadaGenerica es una ListaGenerica, donde los elementos de
  * la lista (nodos) referencian al siguiente elemento (nodo), por este motivo,
  * la ListaEnlazadaGenerica no tiene limite en la cantidad de elementos que se
  * pueden almacenar.
@@ -53,31 +53,31 @@ public class ListaEnlazadaGenerica<T> extends ListaGenerica<T> {
 	public boolean agregarEn(T elem, int pos) {
 		if (pos < 1 || pos > this.tamanio() + 1) // posicion no valida
 			return false;
+
+		if (pos == 1) {
+			this.agregarInicio(elem);
+			return true;
+		}
+
 		this.tamanio++;
-		
 		NodoGenerico<T> aux = new NodoGenerico<T>();
 		aux.setDato(elem);
-		if (pos == 1) { // inserta al principio
-			aux.setSiguiente(inicio);
-			this.inicio = aux;
-			if (tamanio == 1) {
-				this.fin = this.inicio;
-			}
-		} else {
-			NodoGenerico<T> n = this.inicio;
-			NodoGenerico<T> ant = null;
-			int posActual = 1;
-			while (!(n == null) && (posActual < pos)) {
-				ant = n;
-				n = n.getSiguiente();
-				posActual++;
-			}
-			aux.setSiguiente(n);
-			ant.setSiguiente(aux);
+		NodoGenerico<T> n = this.inicio;
+		NodoGenerico<T> ant = null;
+		int posActual = 1;
 
-			if (aux.getSiguiente() == null)
-				this.fin = aux;
+		while ((n != null) && (posActual < pos)) {
+			ant = n;
+			n = n.getSiguiente();
+			posActual++;
 		}
+
+		aux.setSiguiente(n);
+		ant.setSiguiente(aux);
+
+		if (aux.getSiguiente() == null)
+			this.fin = aux;
+
 		return true;
 	}
 

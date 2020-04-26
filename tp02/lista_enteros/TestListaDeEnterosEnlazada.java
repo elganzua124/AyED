@@ -1,8 +1,8 @@
-package tp02.ej01;
+package lista_enteros;
 
 /* Ej. 1.3.
  * Escriba una clase llamada TestListaDeEnterosEnlazada que reciba
- * en su método main una secuencia de números, los agregue a un
+ * en su mï¿½todo main una secuencia de nï¿½meros, los agregue a un
  * objeto de tipo ListaDeEnterosEnlazada y luego imprima los
  * elementos de dicha lista.
 */
@@ -13,12 +13,12 @@ public class TestListaDeEnterosEnlazada {
 	public static void main(String[] args) {
 		ListaDeEnterosEnlazada lista = new ListaDeEnterosEnlazada();
 		Scanner consola = new Scanner(System.in);
-		System.out.print("Por favor, ingrese un número: ");
+		System.out.print("Por favor, ingrese un nï¿½mero: ");
 		int num = consola.nextInt();
 		lista.comenzar();
 		while (num != 0) {
 			lista.agregarFinal(num);
-			System.out.print("Por favor, ingrese un número: ");
+			System.out.print("Por favor, ingrese un nï¿½mero: ");
 			num = consola.nextInt();
 		}
 		System.out.println("Contenido de lista: ");
@@ -38,8 +38,8 @@ public class TestListaDeEnterosEnlazada {
 
 	
 	/* Ej. 1.5.
-	 * Escriba un método recursivo que imprima los elementos de una lista en
-	 * sentido inverso. La lista la recibe por parámetro.
+	 * Escriba un mï¿½todo recursivo que imprima los elementos de una lista en
+	 * sentido inverso. La lista la recibe por parï¿½metro.
 	 */
 	
 	
