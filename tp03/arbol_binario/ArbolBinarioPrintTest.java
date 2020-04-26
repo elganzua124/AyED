@@ -1,118 +1,91 @@
 package arbol_binario;
 
+@SuppressWarnings("rawtypes")
 public class ArbolBinarioPrintTest {
 
-	static ArbolBinario<Integer> arbolBinarioA;
-	static ArbolBinario<Integer> arbolBinarioB;
-	static ArbolBinario<Integer> arbolBinarioC;
-	static ArbolBinario<Integer> arbolBinarioD;
-	static ArbolBinario<Integer> arbolBinarioE;
-	static ArbolBinario<Integer> arbolBinarioF;
-	static ArbolBinario<Integer> arbolBinarioG;
-	static ArbolBinario<Integer> arbolBinarioV;
+	static ArbolBinario objs[] = new ArbolBinario[6];
 
+	private static void testArbol(ArbolBinario arbol) {
+		System.out.print("Altura: " + arbol.altura());
+		System.out.println("");
+		System.out.println("Representacion:");
+		System.out.println(arbol.toString());
+		System.out.println("Su espejo:");
+		System.out.println(arbol.espejo().toString());
+		System.out.println("-----------------------");
+	}
+
+	@SuppressWarnings("unchecked")
 	public static void main(String[] args) {
-		// ----- arbolBinarioA -----
-		arbolBinarioA = new ArbolBinario<Integer>(1);
+
+		objs[0] = new ArbolBinario<Character>('a'); // upcasting
 		ArbolBinario<Integer> hijoIzquierdo = new ArbolBinario<Integer>(2);
 		hijoIzquierdo.agregarHijoIzquierdo(new ArbolBinario<Integer>(3));
 		hijoIzquierdo.agregarHijoDerecho(new ArbolBinario<Integer>(4));
 		ArbolBinario<Integer> hijoDerecho = new ArbolBinario<Integer>(5);
 		hijoDerecho.agregarHijoIzquierdo(new ArbolBinario<Integer>(6));
-		hijoDerecho.agregarHijoDerecho(new ArbolBinario<Integer>(7));
-		arbolBinarioA.agregarHijoIzquierdo(hijoIzquierdo);
-		arbolBinarioA.agregarHijoDerecho(hijoDerecho);
+		ArbolBinario f = new ArbolBinario<Integer>(8); // upcasting
+		f.agregarHijoIzquierdo(new ArbolBinario<String>("holaa"));
+		hijoDerecho.agregarHijoDerecho(f);
+		objs[0].agregarHijoIzquierdo(hijoIzquierdo);
+		objs[0].agregarHijoDerecho(hijoDerecho);
 
-		// ----- arbolBinarioB -----
-		arbolBinarioB = new ArbolBinario<Integer>(1);
+		objs[1] = new ArbolBinario<Integer>(1);
 		ArbolBinario<Integer> hijoIzquierdoB = new ArbolBinario<Integer>(2);
 		hijoIzquierdoB.agregarHijoIzquierdo(new ArbolBinario<Integer>(3));
 		hijoIzquierdoB.agregarHijoDerecho(new ArbolBinario<Integer>(4));
 		ArbolBinario<Integer> hijoDerechoB = new ArbolBinario<Integer>(6);
 		hijoDerechoB.agregarHijoIzquierdo(new ArbolBinario<Integer>(7));
 		hijoDerechoB.agregarHijoDerecho(new ArbolBinario<Integer>(8));
-		arbolBinarioB.agregarHijoIzquierdo(hijoIzquierdoB);
-		arbolBinarioB.agregarHijoDerecho(hijoDerechoB);
+		objs[1].agregarHijoIzquierdo(hijoIzquierdoB);
+		objs[1].agregarHijoDerecho(hijoDerechoB);
 
-		// ----- arbolBinarioC -----
-		arbolBinarioC = new ArbolBinario<Integer>(11);
+		objs[2] = new ArbolBinario<Integer>(11);
 		ArbolBinario<Integer> hijoIzquierdoC = new ArbolBinario<Integer>(12);
 		hijoIzquierdoC.agregarHijoIzquierdo(new ArbolBinario<Integer>(13));
 		hijoIzquierdoC.agregarHijoDerecho(new ArbolBinario<Integer>(14));
 		ArbolBinario<Integer> hijoDerechoC = new ArbolBinario<Integer>(15);
 		hijoDerechoC.agregarHijoDerecho(new ArbolBinario<Integer>(8));
-		arbolBinarioC.agregarHijoIzquierdo(hijoIzquierdoC);
-		arbolBinarioC.agregarHijoDerecho(hijoDerechoC);
+		objs[2].agregarHijoIzquierdo(hijoIzquierdoC);
+		objs[2].agregarHijoDerecho(hijoDerechoC);
 
-		// ----- arbolBinarioD -----
-		arbolBinarioD = new ArbolBinario<Integer>(11);
+		objs[3] = new ArbolBinario<Integer>(11);
 		ArbolBinario<Integer> hijoIzquierdoD = new ArbolBinario<Integer>(12);
 		hijoIzquierdoD.agregarHijoIzquierdo(new ArbolBinario<Integer>(13));
 		hijoIzquierdoD.agregarHijoDerecho(new ArbolBinario<Integer>(14));
 		ArbolBinario<Integer> hijoDerechoD = new ArbolBinario<Integer>(15);
 		hijoDerechoD.agregarHijoIzquierdo(new ArbolBinario<Integer>(8));
-		arbolBinarioD.agregarHijoIzquierdo(hijoIzquierdoD);
-		arbolBinarioD.agregarHijoDerecho(hijoDerechoD);
+		objs[3].agregarHijoIzquierdo(hijoIzquierdoD);
+		objs[3].agregarHijoDerecho(hijoDerechoD);
 
-		// ----- arbolBinarioE -----
-		arbolBinarioE = new ArbolBinario<Integer>(1);
+		objs[4] = new ArbolBinario<Integer>(1);
 		ArbolBinario<Integer> hijoIzquierdoE = new ArbolBinario<Integer>(2);
 		hijoIzquierdoE.agregarHijoIzquierdo(new ArbolBinario<Integer>(4));
 		hijoIzquierdoE.agregarHijoDerecho(new ArbolBinario<Integer>(5));
 		ArbolBinario<Integer> hijoDerechoE = new ArbolBinario<Integer>(3);
 		hijoDerechoE.agregarHijoIzquierdo(new ArbolBinario<Integer>(6));
-		arbolBinarioE.agregarHijoIzquierdo(hijoIzquierdoE);
-		arbolBinarioE.agregarHijoDerecho(hijoDerechoE);
+		objs[4].agregarHijoIzquierdo(hijoIzquierdoE);
+		objs[4].agregarHijoDerecho(hijoDerechoE);
 
-		// ----- arbolBinarioF -----
-		arbolBinarioF = new ArbolBinario<Integer>(1);
+		objs[5] = new ArbolBinario<Integer>(1);
 		ArbolBinario<Integer> hijoIzquierdoF = new ArbolBinario<Integer>(3);
 		hijoIzquierdoF.agregarHijoDerecho(new ArbolBinario<Integer>(6));
-		ArbolBinario<Integer> hijoDerechoF = new ArbolBinario<Integer>(2);
+		ArbolBinario hijoDerechoF = new ArbolBinario<String>("jeje"); // upcasting
 		hijoDerechoF.agregarHijoIzquierdo(new ArbolBinario<Integer>(5));
 		hijoDerechoF.agregarHijoDerecho(new ArbolBinario<Integer>(4));
-		arbolBinarioF.agregarHijoIzquierdo(hijoIzquierdoF);
-		arbolBinarioF.agregarHijoDerecho(hijoDerechoF);
+		objs[5].agregarHijoIzquierdo(hijoIzquierdoF);
+		objs[5].agregarHijoDerecho(hijoDerechoF);
 
-		
-		
-		// ---- Comienzo de tests de espejo de arboles ----
-		
 		System.out.println("###########################");
-		System.out.println("# Test de arboles espejos #");
+		System.out.println("#     Inicio de tests     #");
 		System.out.println("###########################");
 		System.out.println("");
-		
-		System.out.println(arbolBinarioA.toString());
-		System.out.println(arbolBinarioA.espejo().toString());
 
-		System.out.println("-----------------------");
+		for (int i = 0; i < objs.length; i++) {
+			System.out.println("Arbol " + (i + 1));
+			testArbol(objs[i]);
+		}
 
-		System.out.println(arbolBinarioB.toString());
-		System.out.println(arbolBinarioB.espejo().toString());
-		System.out.println(arbolBinarioB.toString());
-		System.out.println("-----------------------");
-
-		System.out.println(arbolBinarioC.toString());
-		System.out.println(arbolBinarioC.espejo().toString());
-
-		System.out.println("-----------------------");
-
-		System.out.println(arbolBinarioD.toString());
-		System.out.println(arbolBinarioD.espejo().toString());
-
-		System.out.println("-----------------------");
-
-		System.out.println(arbolBinarioE.toString());
-		System.out.println(arbolBinarioE.espejo().toString());
-
-		System.out.println("-----------------------");
-
-		System.out.println(arbolBinarioF.toString());
-		System.out.println(arbolBinarioF.espejo().toString());
-
-		// ----- Fin de tests de espejo de arboles -----
-		
 	}
 
 }
