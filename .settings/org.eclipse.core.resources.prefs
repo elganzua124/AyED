@@ -1,2 +1,5 @@
+=\=\=\=\=\=\=
+<<<<<<<=HEAD
+>>>>>>>=refs/remotes/origin/master
 eclipse.preferences.version=1
-encoding//tp03/tp03_ej01_ej02/ArbolBinario.java=UTF-8
+encoding//src/estructuras/arbol/ArbolBinario.java=UTF-8
