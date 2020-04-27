@@ -1,4 +1,4 @@
-package estructuras.arbol;
+package estructuras.arbol.tests;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -6,6 +6,7 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.Test;
 
+import estructuras.arbol.ArbolBinario;
 import estructuras.listas.ListaEnlazadaGenerica;
 
 public class ArbolBinarioTest {
