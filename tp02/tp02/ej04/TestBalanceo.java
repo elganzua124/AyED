@@ -2,7 +2,7 @@ package tp02.ej04;
 
 import java.util.Scanner;
 
-import tp02.ej03.PilaGenerica;
+import pila_y_cola.PilaGenerica;
 
 public class TestBalanceo {
 

@@ -1,4 +1,4 @@
-package tp02.ej02;
+package listas_genericas;
 
 /**
  * ListaDeEnteros es una clase abstracta que define los métodos que deberán

@@ -1,13 +1,13 @@
 package tp01b.ej04;
 
 /*
-Dado un arreglo de valores tipo int se desea calcular el valor máximo, mínimo, y
-promedio en un único método. Escriba tres métodos de clase, donde respectivamente:
-a. Devuelva lo pedido por el mecanismo de retorno de un método en Java
+Dado un arreglo de valores tipo int se desea calcular el valor mï¿½ximo, mï¿½nimo, y
+promedio en un ï¿½nico mï¿½todo. Escriba tres mï¿½todos de clase, donde respectivamente:
+a. Devuelva lo pedido por el mecanismo de retorno de un mï¿½todo en Java
 ("return").
-b. Devuelva lo pedido interactuando con algún parámetro (el parámetro no puede
+b. Devuelva lo pedido interactuando con algï¿½n parï¿½metro (el parï¿½metro no puede
 ser de tipo arreglo).
-c. Devuelva lo pedido sin usar parámetros ni la sentencia "return".
+c. Devuelva lo pedido sin usar parï¿½metros ni la sentencia "return".
 */
 
 import java.util.Scanner;
@@ -34,7 +34,9 @@ public class Calculadora {
 		return d;
 	}
 
-	public static int[] maxminpromB(int[] nums) {
+	public static int[] maxminpromB(int[] nums) {// terminar
+		int t[] = new int[10];
+		return t;
 
 	}
 

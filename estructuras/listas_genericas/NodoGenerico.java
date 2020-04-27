@@ -1,4 +1,4 @@
-package tp02.ej02;
+package listas_genericas;
 /**
  * Esta clase representa un nodo de la lista enlazada.
  * */

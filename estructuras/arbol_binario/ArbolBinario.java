@@ -1,7 +1,6 @@
 package arbol_binario;
 
-import tp02.ej02.*;
-import tp02.ej03.ColaGenerica;
+import pila_y_cola.ColaGenerica;
 
 public class ArbolBinario<T> {
 
@@ -77,8 +76,6 @@ public class ArbolBinario<T> {
 		}
 	}
 
-	// ############### Ejercicio 2 de TP 3 ########################
-
 	// Ej.2 a) Devuelve la cantidad de árbol/subárbol hojas del árbol receptor.
 	public int contarHojas() {
 		return contarHojas(this);
@@ -132,18 +129,33 @@ public class ArbolBinario<T> {
 	 * entre los niveles n y m (ambos inclusive). (0 <= n < m <= altura del árbol)
 	 */
 
-	public int altura() {
-		return altura(this);
+	public void entreNiveles(int n, int m) {
+		if (this.altura() < m || m <= n || n < 0) {
+			System.out.print("\"Valores de n y/o m inválidos.\"");
+			return;
+		}
+		for (int i = n; i <= m; i++)
+			imprimirNivel(i);
 	}
 
-	private int altura(ArbolBinario<T> arbol) {
+	// https://stackoverflow.com/a/13350429
+	private void arbolesEnNivel(int nivelActual, int nivel, ColaGenerica<ArbolBinario<T>> cola) {
+		if (nivelActual == nivel)
+			cola.encolar(this);
+		else {
+			if (!this.getHijoIzquierdo().esVacio())
+				getHijoIzquierdo().arbolesEnNivel(nivelActual + 1, nivel, cola);
+			if (!this.getHijoDerecho().esVacio())
+				getHijoDerecho().arbolesEnNivel(nivelActual + 1, nivel, cola);
+		}
+	}
 
+	public int altura() {
 		int alt = 0;
-
-		if (!arbol.getHijoIzquierdo().esVacio())
-			alt = altura(arbol.getHijoIzquierdo()) + 1;
-		if (!arbol.getHijoDerecho().esVacio()) {
-			int altDer = altura(arbol.getHijoDerecho());
+		if (!this.getHijoIzquierdo().esVacio())
+			alt = this.getHijoIzquierdo().altura() + 1;
+		if (!this.getHijoDerecho().esVacio()) {
+			int altDer = this.getHijoDerecho().altura();
 			if (++altDer > alt)
 				alt = altDer;
 		}
@@ -155,26 +167,34 @@ public class ArbolBinario<T> {
 		ColaGenerica<ArbolBinario<T>> cola = new ColaGenerica<ArbolBinario<T>>();
 		cola.encolar(this);
 		cola.encolar(null); // marca de fin nivel
+		short i = 1;
+		System.out.print("Nivel 0: ");
 		while (!cola.esVacia()) {
 			arbol = cola.desencolar();
 			if (arbol != null) {
-				System.out.println(arbol.getDatoRaiz());
+				System.out.print(arbol.getDatoRaiz() + " ");
 				if (!arbol.getHijoIzquierdo().esVacio())
 					cola.encolar(arbol.getHijoIzquierdo());
 				if (!arbol.getHijoDerecho().esVacio())
 					cola.encolar(arbol.getHijoDerecho());
 			} else if (!cola.esVacia()) { // el null que recibimos es por cambio de nivel
-				System.out.println();
+				System.out.println("");
+				System.out.print("Nivel " + i++ + ": ");
 				cola.encolar(null); // agregamos la marca de fin del nivel proximo a evaluar
 			}
 		}
 	}
 
-	public void entreNiveles(int n, int m) {
+	private void imprimirNivel(int n) {
+		ColaGenerica<ArbolBinario<T>> cola = new ColaGenerica<ArbolBinario<T>>();
 
+		arbolesEnNivel(0, n, cola);
+
+		System.out.print("Nivel " + n + ": ");
+		while (!cola.esVacia())
+			System.out.print(cola.desencolar().getDatoRaiz() + " ");
+		System.out.println("");
 	}
-
-	// ############### Fin ejercicio 2 de TP 3 ####################
 
 	// ##### https://stackoverflow.com/a/27153988 ####
 

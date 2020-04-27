@@ -6,7 +6,7 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.Test;
 
-import tp02.ej02.ListaEnlazadaGenerica;
+import listas_genericas.ListaEnlazadaGenerica;
 
 public class ArbolBinarioTest {
 

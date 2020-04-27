@@ -10,15 +10,17 @@ package lista_enteros;
 import java.util.Scanner;
 
 public class TestListaDeEnterosConArreglos {
+	private static Scanner consola;
+
 	public static void main(String[] args) {
 		ListaDeEnterosConArreglos lista = new ListaDeEnterosConArreglos();
 		lista.comenzar();
-		Scanner consola = new Scanner(System.in);
-		System.out.print("Por favor, ingrese un n�mero: ");
+		consola = new Scanner(System.in);
+		System.out.print("Por favor, ingrese un número: ");
 		int num = consola.nextInt();
 		while (num != 0) {
 			lista.agregarFinal(num);
-			System.out.print("Por favor, ingrese un n�mero: ");
+			System.out.print("Por favor, ingrese un número: ");
 			num = consola.nextInt();
 		}
 		System.out.println("Contenido de lista: ");

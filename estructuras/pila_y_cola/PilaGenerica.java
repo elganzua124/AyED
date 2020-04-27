@@ -1,6 +1,6 @@
-package tp02.ej03;
+package pila_y_cola;
 
-import tp02.ej02.ListaEnlazadaGenerica;
+import listas_genericas.ListaEnlazadaGenerica;
 
 public class PilaGenerica<T> {
 

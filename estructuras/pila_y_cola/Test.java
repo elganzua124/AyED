@@ -1,4 +1,4 @@
-package tp02.ej03;
+package pila_y_cola;
 
 public class Test {
 

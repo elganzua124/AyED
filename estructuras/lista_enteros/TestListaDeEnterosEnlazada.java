@@ -10,9 +10,12 @@ package lista_enteros;
 import java.util.Scanner;
 
 public class TestListaDeEnterosEnlazada {
+	private static Scanner consola;
+
+
 	public static void main(String[] args) {
 		ListaDeEnterosEnlazada lista = new ListaDeEnterosEnlazada();
-		Scanner consola = new Scanner(System.in);
+		consola = new Scanner(System.in);
 		System.out.print("Por favor, ingrese un n�mero: ");
 		int num = consola.nextInt();
 		lista.comenzar();

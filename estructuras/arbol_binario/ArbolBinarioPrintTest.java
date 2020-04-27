@@ -12,6 +12,12 @@ public class ArbolBinarioPrintTest {
 		System.out.println(arbol.toString());
 		System.out.println("Su espejo:");
 		System.out.println(arbol.espejo().toString());
+		System.out.println("Recorrido por niveles:");
+		arbol.recorridoPorNiveles();
+		System.out.println("");
+		System.out.println("Recorrido entre niveles 2 y 3:");
+		arbol.entreNiveles(2,3);
+		System.out.println("");
 		System.out.println("-----------------------");
 	}
 
@@ -81,9 +87,8 @@ public class ArbolBinarioPrintTest {
 		System.out.println("###########################");
 		System.out.println("");
 
-		for (int i = 0; i < objs.length; i++) {
-			System.out.println("Arbol " + (i + 1));
-			testArbol(objs[i]);
+		for (ArbolBinario arbol : objs) {
+			testArbol(arbol);
 		}
 
 	}
