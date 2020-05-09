@@ -110,12 +110,12 @@ public class ArbolGeneral<T> {
 		}
 		ListaGenerica<ArbolGeneral<T>> hijos = this.getHijos();
 		hijos.comenzar();
-		int max = -1;
-		while (max == -1 && !hijos.fin()) {
+		int n = -1;
+		while (n == -1 && !hijos.fin()) {
 			ArbolGeneral<T> arbol = hijos.proximo();
-			max = arbol.nivel(dato, nivel + 1);
+			n = arbol.nivel(dato, nivel + 1);
 		}
-		return max;
+		return n;
 	}
 
 	public Integer nivel(T dato) {
