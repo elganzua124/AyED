@@ -9,7 +9,7 @@ package estructuras.tests;
 
 import java.util.Scanner;
 
-import estructuras.ListaDeEnterosConArreglos;
+import src.estructuras.ListaDeEnterosConArreglos;
 
 public class TestListaDeEnterosConArreglos {
 	private static Scanner consola;
