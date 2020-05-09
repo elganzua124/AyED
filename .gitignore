@@ -23,4 +23,8 @@ hs_err_pid*
 
 .classpath
 .project
+<<<<<<< HEAD
 .settings/
+=======
+.settings/
+>>>>>>> refs/remotes/origin/master
