@@ -1,6 +1,4 @@
-package estructuras.pila_y_cola;
-
-import estructuras.listas.ListaEnlazadaGenerica;
+package estructuras;
 
 public class PilaGenerica<T> {
 

@@ -1,6 +1,6 @@
-package tp02.ej01_6;
+package tp02;
 
-import estructuras.listas.ListaDeEnterosEnlazada;
+import estructuras.ListaDeEnterosEnlazada;
 
 /* Ej. 1.6 a)
  * Escriba un programa recursivo que, a partir de un número n,

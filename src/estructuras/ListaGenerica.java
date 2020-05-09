@@ -1,4 +1,4 @@
-package estructuras.listas;
+package estructuras;
 
 /**
  * ListaDeEnteros es una clase abstracta que define los métodos que deberán

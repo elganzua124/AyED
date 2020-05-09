@@ -1,4 +1,6 @@
-package estructuras.arbol;
+package estructuras.tests;
+
+import estructuras.ArbolBinario;
 
 @SuppressWarnings("rawtypes")
 public class ArbolBinarioPrintTest {
@@ -16,7 +18,7 @@ public class ArbolBinarioPrintTest {
 		arbol.recorridoPorNiveles();
 		System.out.println("");
 		System.out.println("Recorrido entre niveles 2 y 3:");
-		arbol.entreNiveles(2,3);
+		arbol.entreNiveles(2, 3);
 		System.out.println("");
 		System.out.println("-----------------------");
 	}

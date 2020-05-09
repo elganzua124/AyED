@@ -1,6 +1,4 @@
-package estructuras.listas;
-
-import estructuras.arbol.NodoEntero;
+package estructuras;
 
 public class ListaDeEnterosEnlazada extends ListaDeEnteros {
 	private NodoEntero inicio;

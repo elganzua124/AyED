@@ -1,4 +1,4 @@
-package estructuras.arbol;
+package estructuras;
 
 public class NodoEntero {
 	private Integer dato;

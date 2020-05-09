@@ -1,7 +1,7 @@
 package tp03.ej03;
 
-import estructuras.arbol.ArbolBinario;
-import estructuras.listas.ListaDeEnterosEnlazada;
+import estructuras.ArbolBinario;
+import estructuras.ListaDeEnterosEnlazada;
 
 public class ContadorArbol {
 

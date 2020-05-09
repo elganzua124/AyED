@@ -1,6 +1,4 @@
-package estructuras.listas;
-
-import estructuras.arbol.NodoGenerico;
+package estructuras;
 
 /**
  * La clase ListaEnlazadaGenerica es una ListaGenerica, donde los elementos de

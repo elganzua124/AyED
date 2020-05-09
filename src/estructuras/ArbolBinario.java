@@ -1,6 +1,4 @@
-package estructuras.arbol;
-
-import estructuras.pila_y_cola.ColaGenerica;
+package estructuras;
 
 public class ArbolBinario<T> {
 
@@ -155,8 +153,8 @@ public class ArbolBinario<T> {
 		if (!this.getHijoIzquierdo().esVacio())
 			alt = this.getHijoIzquierdo().altura() + 1;
 		if (!this.getHijoDerecho().esVacio()) {
-			int altDer = this.getHijoDerecho().altura();
-			if (++altDer > alt)
+			int altDer = this.getHijoDerecho().altura() + 1;
+			if (altDer > alt)
 				alt = altDer;
 		}
 		return alt;
@@ -221,7 +219,4 @@ public class ArbolBinario<T> {
 		}
 		return sb;
 	}
-
-	// ###############################################
-
 }

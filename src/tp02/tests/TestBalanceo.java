@@ -1,8 +1,12 @@
-package tp02.ej04;
+package tp02.tests;
+
+/*
+ * Ejercicio 4 de tp 2
+ * */
 
 import java.util.Scanner;
 
-import estructuras.pila_y_cola.PilaGenerica;
+import estructuras.PilaGenerica;
 
 public class TestBalanceo {
 

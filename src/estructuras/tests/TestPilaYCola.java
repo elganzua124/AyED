@@ -1,4 +1,7 @@
-package estructuras.pila_y_cola;
+package estructuras.tests;
+
+import estructuras.ColaGenerica;
+import estructuras.PilaGenerica;
 
 public class TestPilaYCola {
 

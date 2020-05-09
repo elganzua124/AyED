@@ -1,4 +1,4 @@
-package estructuras.listas;
+package estructuras;
 
 public class ListaDeEnterosConArreglos extends ListaDeEnteros {
 	private int tamanio;

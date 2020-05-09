@@ -1,4 +1,4 @@
-package estructuras.listas;
+package estructuras.tests;
 
 /* Ej. 1.3.
  * Escriba una clase llamada TestListaDeEnterosEnlazada que reciba
@@ -8,6 +8,8 @@ package estructuras.listas;
 */
 
 import java.util.Scanner;
+
+import estructuras.ListaDeEnterosEnlazada;
 
 public class TestListaDeEnterosEnlazada {
 	private static Scanner consola;

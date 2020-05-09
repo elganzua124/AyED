@@ -1,6 +1,6 @@
-package tp02.ej01_6;
+package tp02;
 
-import estructuras.listas.ListaDeEnterosEnlazada;
+import estructuras.ListaDeEnterosEnlazada;
 
 /* Ej. 1.6 b)
  * Escriba un m�todo main que pruebe el m�todo implementado en a)

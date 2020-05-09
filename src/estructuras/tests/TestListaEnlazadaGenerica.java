@@ -1,5 +1,6 @@
-package estructuras.listas;
+package estructuras.tests;
 
+import estructuras.ListaEnlazadaGenerica;
 import tp01b.ej03.Estudiante;
 
 public class TestListaEnlazadaGenerica {
