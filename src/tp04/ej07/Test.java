@@ -1,8 +1,8 @@
 package tp04.ej07;
 
-import estructuras.ArbolGeneral;
-import estructuras.ListaEnlazadaGenerica;
-import estructuras.ListaGenerica;
+import estructuras.arboles.ArbolGeneral;
+import estructuras.listas.ListaEnlazadaGenerica;
+import estructuras.listas.ListaGenerica;
 
 public class Test {
 

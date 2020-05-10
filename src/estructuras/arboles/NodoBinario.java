@@ -1,4 +1,4 @@
-package estructuras;
+package estructuras.arboles;
 
 public class NodoBinario<T> {
 

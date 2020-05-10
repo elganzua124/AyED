@@ -1,4 +1,4 @@
-package estructuras;
+package estructuras.listas;
 
 /**
  * Esta clase representa un nodo de la lista enlazada.

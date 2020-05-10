@@ -1,4 +1,4 @@
-package estructuras;
+package estructuras.listas;
 
 public abstract class ListaDeEnteros {
 	

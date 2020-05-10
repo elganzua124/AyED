@@ -1,9 +1,9 @@
 package tp04.recorrido;
 
-import estructuras.ArbolGeneral;
 import estructuras.ColaGenerica;
-import estructuras.ListaEnlazadaGenerica;
-import estructuras.ListaGenerica;
+import estructuras.arboles.ArbolGeneral;
+import estructuras.listas.ListaEnlazadaGenerica;
+import estructuras.listas.ListaGenerica;
 
 public class Recorrido {
 

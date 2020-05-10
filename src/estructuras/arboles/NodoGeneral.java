@@ -1,4 +1,7 @@
-package estructuras;
+package estructuras.arboles;
+
+import estructuras.listas.ListaEnlazadaGenerica;
+import estructuras.listas.ListaGenerica;
 
 public class NodoGeneral<T> {
 

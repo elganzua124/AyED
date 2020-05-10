@@ -1,4 +1,8 @@
-package estructuras;
+package estructuras.arboles;
+
+import estructuras.ColaGenerica;
+import estructuras.listas.ListaEnlazadaGenerica;
+import estructuras.listas.ListaGenerica;
 
 public class ArbolGeneral<T> {
 

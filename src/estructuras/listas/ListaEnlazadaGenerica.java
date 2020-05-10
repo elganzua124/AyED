@@ -1,4 +1,4 @@
-package estructuras;
+package estructuras.listas;
 
 /**
  * La clase ListaEnlazadaGenerica es una ListaGenerica, donde los elementos de

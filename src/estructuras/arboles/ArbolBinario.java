@@ -1,4 +1,6 @@
-package estructuras;
+package estructuras.arboles;
+
+import estructuras.ColaGenerica;
 
 public class ArbolBinario<T> {
 

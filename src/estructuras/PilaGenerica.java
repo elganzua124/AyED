@@ -1,5 +1,7 @@
 package estructuras;
 
+import estructuras.listas.ListaEnlazadaGenerica;
+
 public class PilaGenerica<T> {
 
 	private ListaEnlazadaGenerica<T> datos= new ListaEnlazadaGenerica<T>();
