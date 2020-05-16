@@ -1,6 +1,6 @@
 package estructuras.tests;
 
-import src.estructuras.ArbolBinario;
+import estructuras.arboles.ArbolBinario;
 
 @SuppressWarnings("rawtypes")
 public class ArbolBinarioPrintTest {

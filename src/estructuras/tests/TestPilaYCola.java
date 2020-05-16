@@ -1,7 +1,7 @@
 package estructuras.tests;
 
-import src.estructuras.ColaGenerica;
-import src.estructuras.PilaGenerica;
+import estructuras.ColaGenerica;
+import estructuras.PilaGenerica;
 
 public class TestPilaYCola {
 

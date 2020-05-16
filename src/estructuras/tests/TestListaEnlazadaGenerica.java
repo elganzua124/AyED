@@ -1,7 +1,7 @@
 package estructuras.tests;
 
-import src.estructuras.ListaEnlazadaGenerica;
-import src.tp01b.ej03.Estudiante;
+import estructuras.listas.ListaEnlazadaGenerica;
+import tp01b.ej03.Estudiante;
 
 public class TestListaEnlazadaGenerica {
 

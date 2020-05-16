@@ -6,8 +6,8 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.Test;
 
-import src.estructuras.ArbolBinario;
-import src.estructuras.ListaEnlazadaGenerica;
+import estructuras.arboles.ArbolBinario;
+import estructuras.listas.ListaEnlazadaGenerica;
 
 public class ArbolBinarioTest {
 

@@ -9,7 +9,7 @@ package estructuras.tests;
 
 import java.util.Scanner;
 
-import src.estructuras.ListaDeEnterosEnlazada;
+import estructuras.listas.ListaDeEnterosEnlazada;
 
 public class TestListaDeEnterosEnlazada {
 	private static Scanner consola;

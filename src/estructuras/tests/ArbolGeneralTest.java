@@ -5,7 +5,7 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.Test;
 
-import src.estructuras.ArbolGeneral;
+import estructuras.arboles.ArbolGeneral;
 
 public class ArbolGeneralTest {
 
