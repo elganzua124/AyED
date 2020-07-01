@@ -193,4 +193,29 @@ public class ArbolGeneral<T> {
 		return (ListaEnlazadaGenerica<T>) lista;
 	}
 
+	public Boolean esAncestro(T a, T b) {
+		if (!this.esVacio()) {
+			boolean a1 = false;
+			boolean b1 = false;
+			return this.esAncestroPrivado(a, b, a1, b1);
+		} else
+			return false;
+	}
+
+	private boolean esAncestroPrivado(T a, T b, boolean a1, boolean b1) {
+		if (a.equals(this.getDatoRaiz()))
+			a1 = true;
+		if (a1)
+			if (b.equals(this.getDatoRaiz()))
+				b1 = true;
+		if (a1 == true && b1 == true)
+			return true;
+		ListaGenerica<ArbolGeneral<T>> hijos = this.getHijos();
+		hijos.comenzar();
+		boolean encontrado = false;
+		while (!hijos.fin() && encontrado == false)
+			encontrado = hijos.proximo().esAncestroPrivado(a, b, a1, b1);
+		return encontrado;
+	}
+
 }

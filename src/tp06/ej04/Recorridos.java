@@ -7,11 +7,11 @@ import estructuras.listas.*;
 public class Recorridos<T> {
 
 	public ListaGenerica<Vertice<T>> dfs(Grafo<T> grafo) {
-		int tam = grafo.listaDeVertices().tamanio();
+		int tam = grafo.listaDeVertices().tamanio() + 1;
 		boolean[] marcas = new boolean[tam];
 		ListaGenerica<Vertice<T>> lista = new ListaEnlazadaGenerica<Vertice<T>>();
 		lista.comenzar();
-		for (int i = 0; i < tam; i++) {
+		for (int i = 1; i <= tam; i++) {
 			if (!marcas[i]) {
 				dfs(grafo, marcas, i, lista);
 			}
@@ -34,30 +34,38 @@ public class Recorridos<T> {
 	}
 
 	public ListaGenerica<Vertice<T>> bfs(Grafo<T> grafo) {
-		ListaGenerica<Vertice<T>> listaDeVertices = grafo.listaDeVertices();
-		ListaGenerica<Arista<T>> listaDeAdyacentes;
-		ListaGenerica<Vertice<T>> lista = new ListaEnlazadaGenerica<Vertice<T>>();
-		ColaGenerica<Vertice<T>> cola = new ColaGenerica<Vertice<T>>();
-		Vertice<T> vertice;
-		listaDeVertices.comenzar();
-		cola.encolar(listaDeVertices.proximo());
-		cola.encolar(null);
-		while (!cola.esVacia()) {
-			vertice = cola.desencolar();
-			if (vertice != null) {
-				if (!lista.incluye(vertice)) {
-					lista.agregarFinal(vertice);
-					listaDeAdyacentes = ((VerticeImplListAdy<T>) vertice).obtenerAdyacentes();
-					while (!listaDeAdyacentes.fin()) {
-						cola.encolar(listaDeAdyacentes.proximo().verticeDestino());
-					}
-				}
-			} else {
-				if (!cola.esVacia()) {
-					cola.encolar(null);
+		ListaGenerica<Vertice<T>> resultado = new ListaEnlazadaGenerica<Vertice<T>>();
+		if (!grafo.esVacio()) {
+			boolean[] visitados = new boolean[grafo.listaDeVertices().tamanio() + 1];
+			ListaGenerica<Vertice<T>> listaDeVertices = grafo.listaDeVertices();
+			listaDeVertices.comenzar();
+			while (!listaDeVertices.fin()) {
+				Vertice<T> vInicial = grafo.listaDeVertices().proximo();
+				if (!visitados[vInicial.getPosicion()]) {
+					bfs(vInicial, visitados, resultado, grafo);
 				}
 			}
 		}
-		return lista;
+		return resultado;
 	}
+
+	private void bfs(Vertice<T> vInicial, boolean[] visitados, ListaGenerica<Vertice<T>> resultado, Grafo<T> grafo) {
+		ColaGenerica<Vertice<T>> cola = new ColaGenerica<Vertice<T>>();
+		cola.encolar(vInicial);
+		visitados[vInicial.getPosicion()] = true;
+		while (!cola.esVacia()) {
+			Vertice<T> vActual = cola.desencolar();
+			resultado.agregarFinal(vActual);
+			ListaGenerica<Arista<T>> listaDeAdyacentes = grafo.listaDeAdyacentes(vActual);
+			listaDeAdyacentes.comenzar();
+			while (!listaDeAdyacentes.fin()) {
+				Vertice<T> vSiguiente = listaDeAdyacentes.proximo().verticeDestino();
+				if (!visitados[vSiguiente.getPosicion()]) {
+					visitados[vSiguiente.getPosicion()] = true;
+					cola.encolar(vSiguiente);
+				}
+			}
+		}
+	}
+
 }
