@@ -73,24 +73,23 @@ public class Mapa {
 	private void dfs(Vertice<String> v, String c2, boolean[] marcas, ListaGenerica<Vertice<String>> lista,
 			ListaGenerica<Vertice<String>> camino, ListaGenerica<String> ciudades) {
 		marcas[v.getPosicion()] = true;
-
 		camino.agregarFinal(v);
 		if (v.dato().equals(c2)) {
-			lista = camino.clonar();
-		} else {
-			ListaGenerica<Arista<String>> listaDeAdyacentes = mapaCiudades.listaDeAdyacentes(v);
-			Arista<String> arista;
-			while (!listaDeAdyacentes.fin()) {
-				arista = listaDeAdyacentes.proximo();
-				int j = arista.verticeDestino().getPosicion();
-
-				if (!marcas[j] && !ciudades.incluye(arista.verticeDestino().dato())) {
-					dfs(arista.verticeDestino(), c2, marcas, lista, camino, ciudades);
-					marcas[j] = false;
-					camino.eliminarEn(j);
-				}
-			}
+			clonar(lista, camino);
+			return;
 		}
+		ListaGenerica<Arista<String>> adyacentes = mapaCiudades.listaDeAdyacentes(v);
+		adyacentes.comenzar();
+		while (!adyacentes.fin()) {
+			Arista<String> arista = adyacentes.proximo();
+			int j = arista.verticeDestino().getPosicion();
+
+			if (!marcas[j] && !ciudades.incluye(arista.verticeDestino().dato()))
+				dfs(arista.verticeDestino(), c2, marcas, lista, camino, ciudades);
+
+		}
+		marcas[v.getPosicion()] = false;
+		camino.eliminarEn(lista.tamanio());
 	}
 
 	public ListaGenerica<Vertice<String>> caminoMasCorto(String ciudad1, String ciudad2) {
@@ -100,7 +99,7 @@ public class Mapa {
 		boolean[] marcas = new boolean[mapaCiudades.listaDeVertices().tamanio()];
 
 		int distancia = 0;
-		Integer min = Integer.MAX_VALUE;
+		int[] min = { Integer.MAX_VALUE };
 
 		Vertice<String> v1 = buscarCiudad(ciudad1);
 
@@ -110,27 +109,40 @@ public class Mapa {
 	}
 
 	private void dfsMasCorto(Vertice<String> v, String c2, boolean[] marcas, ListaGenerica<Vertice<String>> lista,
-			ListaGenerica<Vertice<String>> camino, int distancia, Integer min) {
+			ListaGenerica<Vertice<String>> camino, int distancia, int[] min) {
 		marcas[v.getPosicion()] = true;
+		camino.agregarFinal(v);
 		if (v.dato().equals(c2)) {
-			if (min > distancia) {
-				lista = camino.clonar();
-				min = distancia;
+			if (min[0] > distancia) {
+				clonar(lista, camino);
+				min[0] = distancia;
 			}
 		} else {
-			ListaGenerica<Arista<String>> ady = mapaCiudades.listaDeAdyacentes(v);
-			Arista<String> arista;
-			while (!ady.fin()) {
-				arista = ady.proximo();
+			ListaGenerica<Arista<String>> adyacentes = mapaCiudades.listaDeAdyacentes(v);
+			adyacentes.comenzar();
+			while (!adyacentes.fin()) {
+				Arista<String> arista = adyacentes.proximo();
 				int j = arista.verticeDestino().getPosicion();
 				if (!marcas[j]) {
 					distancia += arista.peso();
 					dfsMasCorto(arista.verticeDestino(), c2, marcas, lista, camino, distancia, min);
-					marcas[j] = false;
-					camino.eliminarEn(j);
+
 				}
 			}
 		}
+		marcas[v.getPosicion()] = false;
+		camino.eliminarEn(lista.tamanio());
+	}
+
+	private <T> void clonar(ListaGenerica<T> camino, ListaGenerica<T> caminoMin) {
+		while (!caminoMin.esVacia())
+			caminoMin.eliminarEn(1);
+
+		camino.comenzar();
+		while (!camino.fin()) {
+			caminoMin.agregarFinal(camino.proximo());
+		}
+
 	}
 
 }
