@@ -14,82 +14,74 @@ public class Mapa {
 
 	public ListaGenerica<Vertice<String>> devolverCamino(String ciudad1, String ciudad2) {
 
-		ListaGenerica<Vertice<String>> lista = new ListaEnlazadaGenerica<Vertice<String>>();
+		ListaGenerica<Vertice<String>> camino = new ListaEnlazadaGenerica<Vertice<String>>();
 
 		boolean[] marcas = new boolean[mapaCiudades.listaDeVertices().tamanio() + 1];
 
 		Vertice<String> v1 = buscarCiudad(ciudad1);
 
 		if (v1 != null && buscarCiudad(ciudad2) != null)
-			dfs(v1, ciudad2, marcas, lista);
-		return lista;
+			dfs(v1, ciudad2, marcas, camino);
+		return camino;
 	}
 
-	private Vertice<String> buscarCiudad(String ciudad) {
-		ListaGenerica<Vertice<String>> vertices = mapaCiudades.listaDeVertices();
-		Vertice<String> v = null;
-		vertices.comenzar();
-		while (!vertices.fin()) {
-			v = vertices.proximo();
-			if (v.dato().equals(ciudad))
-				return v;
-		}
-		return v;
-	}
-
-	private void dfs(Vertice<String> v1, String c2, boolean[] marcas, ListaGenerica<Vertice<String>> lista) {
+	private boolean dfs(Vertice<String> v1, String c2, boolean[] marcas, ListaGenerica<Vertice<String>> camino) {
 		marcas[v1.getPosicion()] = true;
 
-		lista.agregarFinal(v1);
+		camino.agregarFinal(v1);
 		if (v1.dato().equals(c2)) {
-			return;
+			return true;
 		}
 		ListaGenerica<Arista<String>> ady = mapaCiudades.listaDeAdyacentes(v1);
-		Arista<String> a;
-		while (!ady.fin()) {
-			a = ady.proximo();
-			int j = a.verticeDestino().getPosicion();
+		boolean encontre = false;
+		while (!ady.fin() && !encontre) {
+			Vertice<String> a = ady.proximo().verticeDestino();
 
-			if (!marcas[j])
-				dfs(a.verticeDestino(), c2, marcas, lista);
+			if (!marcas[a.getPosicion()])
+				encontre = dfs(a, c2, marcas, camino);
 		}
+		if (!encontre)
+			camino.eliminarEn(camino.tamanio());
+		return encontre;
 
 	}
 
 	public ListaGenerica<Vertice<String>> devolverCaminoExceptuando(String ciudad1, String ciudad2,
 			ListaGenerica<String> ciudades) {
-		ListaGenerica<Vertice<String>> lista = new ListaEnlazadaGenerica<Vertice<String>>();
+
 		ListaGenerica<Vertice<String>> camino = new ListaEnlazadaGenerica<Vertice<String>>();
 		boolean[] marcas = new boolean[mapaCiudades.listaDeVertices().tamanio()];
 
 		Vertice<String> v1 = buscarCiudad(ciudad1);
 
 		if (v1 != null && buscarCiudad(ciudad2) != null)
-			dfs(v1, ciudad2, marcas, lista, camino, ciudades);
-		return lista;
+			dfsExceptuando(v1, ciudad2, marcas, camino, ciudades);
+		return camino;
 
 	}
 
-	private void dfs(Vertice<String> v, String c2, boolean[] marcas, ListaGenerica<Vertice<String>> lista,
+	private boolean dfsExceptuando(Vertice<String> v, String c2, boolean[] marcas,
 			ListaGenerica<Vertice<String>> camino, ListaGenerica<String> ciudades) {
 		marcas[v.getPosicion()] = true;
 		camino.agregarFinal(v);
-		if (v.dato().equals(c2)) {
-			clonar(lista, camino);
-			return;
-		}
+		if (v.dato().equals(c2))
+			return true;
+		boolean encontre = false;
 		ListaGenerica<Arista<String>> adyacentes = mapaCiudades.listaDeAdyacentes(v);
 		adyacentes.comenzar();
-		while (!adyacentes.fin()) {
-			Arista<String> arista = adyacentes.proximo();
-			int j = arista.verticeDestino().getPosicion();
+		while (!adyacentes.fin() && !encontre) {
+			Vertice<String> ady = adyacentes.proximo().verticeDestino();
 
-			if (!marcas[j] && !ciudades.incluye(arista.verticeDestino().dato()))
-				dfs(arista.verticeDestino(), c2, marcas, lista, camino, ciudades);
-
+			if (!marcas[ady.getPosicion()] && !ciudades.incluye(ady.dato()))
+				encontre = dfsExceptuando(ady, c2, marcas, camino, ciudades);
 		}
-		marcas[v.getPosicion()] = false;
-		camino.eliminarEn(lista.tamanio());
+
+		if (!encontre) {
+			marcas[v.getPosicion()] = false; // es necesario?
+			camino.eliminarEn(camino.tamanio());
+		}
+
+		return encontre;
 	}
 
 	public ListaGenerica<Vertice<String>> caminoMasCorto(String ciudad1, String ciudad2) {
@@ -122,16 +114,51 @@ public class Mapa {
 			adyacentes.comenzar();
 			while (!adyacentes.fin()) {
 				Arista<String> arista = adyacentes.proximo();
-				int j = arista.verticeDestino().getPosicion();
-				if (!marcas[j]) {
+				if (!marcas[arista.verticeDestino().getPosicion()]) {
 					distancia += arista.peso();
 					dfsMasCorto(arista.verticeDestino(), c2, marcas, lista, camino, distancia, min);
 
 				}
+
 			}
 		}
 		marcas[v.getPosicion()] = false;
 		camino.eliminarEn(lista.tamanio());
+	}
+
+	public ListaGenerica<Vertice<String>> caminoSinCargarCombustible(String ciudad1, String ciudad2, int tanqueAuto) {
+		ListaGenerica<Vertice<String>> camino = new ListaEnlazadaGenerica<Vertice<String>>();
+		boolean[] marcas = new boolean[mapaCiudades.listaDeVertices().tamanio()];
+
+		Vertice<String> v1 = buscarCiudad(ciudad1);
+
+		if (v1 != null && buscarCiudad(ciudad2) != null)
+			dfsSinCargarCombustible(v1, ciudad2, marcas, camino, tanqueAuto);
+
+		return camino;
+
+	}
+
+	private boolean dfsSinCargarCombustible(Vertice<String> v1, String c2, boolean[] marcas,
+			ListaGenerica<Vertice<String>> camino, int tanqueAuto) {
+		marcas[v1.getPosicion()] = true;
+
+		camino.agregarFinal(v1);
+		if (v1.dato().equals(c2)) {
+			return true;
+		}
+		ListaGenerica<Arista<String>> ady = mapaCiudades.listaDeAdyacentes(v1);
+		boolean llego = false;
+		while (!ady.fin() && !llego) {
+			Arista<String> a = ady.proximo();
+
+			if (a.peso() <= tanqueAuto && !marcas[a.verticeDestino().getPosicion()])
+				llego = dfsSinCargarCombustible(a.verticeDestino(), c2, marcas, camino, tanqueAuto - a.peso());
+		}
+		if (!llego)
+			camino.eliminarEn(camino.tamanio());
+		return llego;
+
 	}
 
 	private <T> void clonar(ListaGenerica<T> camino, ListaGenerica<T> caminoMin) {
@@ -143,6 +170,18 @@ public class Mapa {
 			caminoMin.agregarFinal(camino.proximo());
 		}
 
+	}
+
+	private Vertice<String> buscarCiudad(String ciudad) {
+		ListaGenerica<Vertice<String>> vertices = mapaCiudades.listaDeVertices();
+		Vertice<String> v = null;
+		vertices.comenzar();
+		while (!vertices.fin()) {
+			v = vertices.proximo();
+			if (v.dato().equals(ciudad))
+				return v;
+		}
+		return v;
 	}
 
 }

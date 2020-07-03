@@ -13,39 +13,38 @@ import estructuras.listas.ListaGenerica;
 public class GrafoImplListAdy<T> implements Grafo<T> {
 	ListaGenerica<Vertice<T>> vertices = new ListaEnlazadaGenerica<Vertice<T>>();
 
-
 	@Override
 	public void agregarVertice(Vertice<T> v) {
-		if(!vertices.incluye(v)){
-		    vertices.agregarFinal(v);
+		if (!vertices.incluye(v)) {
+			vertices.agregarFinal(v);
 			((VerticeImplListAdy<T>) v).setPosicion(vertices.tamanio());
 		}
 	}
 
 	@Override
 	public void eliminarVertice(Vertice<T> v) {
-		int indice = ((VerticeImplListAdy<T>)v).getPosicion();
-		if(indice >=0){
+		int indice = ((VerticeImplListAdy<T>) v).getPosicion();
+		if (indice >= 0) {
 			Vertice<T> vert;
 			vertices.comenzar();
-			while(!vertices.fin()){
+			while (!vertices.fin()) {
 				vert = vertices.proximo();
 				desConectar(vert, v);
 			}
-			
+
 			boolean salir = false;
 			vertices.comenzar();
-			while(!vertices.fin() && !salir){
+			while (!vertices.fin() && !salir) {
 				vert = vertices.proximo();
-				if(vert.equals(v)){
+				if (vert.equals(v)) {
 					vertices.eliminar(vert);
 					salir = true;
 				}
 			}
 
-			for(;indice<vertices.tamanio();indice++){
+			for (; indice < vertices.tamanio(); indice++) {
 				vert = vertices.elemento(indice);
-				((VerticeImplListAdy<T>)vert).setPosicion(vert.getPosicion()-1);
+				((VerticeImplListAdy<T>) vert).setPosicion(vert.getPosicion() - 1);
 			}
 		}
 	}
@@ -57,7 +56,7 @@ public class GrafoImplListAdy<T> implements Grafo<T> {
 
 	@Override
 	public void conectar(Vertice<T> origen, Vertice<T> destino, int peso) {
-		((VerticeImplListAdy<T>) origen).conectar(destino,peso);
+		((VerticeImplListAdy<T>) origen).conectar(destino, peso);
 	}
 
 	@Override
@@ -84,14 +83,14 @@ public class GrafoImplListAdy<T> implements Grafo<T> {
 	public int peso(Vertice<T> origen, Vertice<T> destino) {
 		return ((VerticeImplListAdy<T>) origen).peso(destino);
 	}
-	
-    @Override
-	public ListaGenerica<Arista<T>> listaDeAdyacentes(Vertice<T> v){
+
+	@Override
+	public ListaGenerica<Arista<T>> listaDeAdyacentes(Vertice<T> v) {
 		return ((VerticeImplListAdy<T>) v).obtenerAdyacentes();
 	}
-	
-    @Override
-	public Vertice<T> vetice(int posicion){
+
+	@Override
+	public Vertice<T> vertice(int posicion) {
 		return vertices.elemento(posicion);
 	}
 }
