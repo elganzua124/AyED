@@ -50,7 +50,7 @@ public class Mapa {
 			ListaGenerica<String> ciudades) {
 
 		ListaGenerica<Vertice<String>> camino = new ListaEnlazadaGenerica<Vertice<String>>();
-		boolean[] marcas = new boolean[mapaCiudades.listaDeVertices().tamanio()];
+		boolean[] marcas = new boolean[mapaCiudades.listaDeVertices().tamanio() + 1];
 
 		Vertice<String> v1 = buscarCiudad(ciudad1);
 
@@ -88,7 +88,7 @@ public class Mapa {
 
 		ListaGenerica<Vertice<String>> lista = new ListaEnlazadaGenerica<Vertice<String>>();
 		ListaGenerica<Vertice<String>> camino = new ListaEnlazadaGenerica<Vertice<String>>();
-		boolean[] marcas = new boolean[mapaCiudades.listaDeVertices().tamanio()];
+		boolean[] marcas = new boolean[mapaCiudades.listaDeVertices().tamanio() + 1];
 
 		int distancia = 0;
 		int[] min = { Integer.MAX_VALUE };
@@ -123,12 +123,12 @@ public class Mapa {
 			}
 		}
 		marcas[v.getPosicion()] = false;
-		camino.eliminarEn(lista.tamanio());
+		camino.eliminarEn(camino.tamanio());
 	}
 
 	public ListaGenerica<Vertice<String>> caminoSinCargarCombustible(String ciudad1, String ciudad2, int tanqueAuto) {
 		ListaGenerica<Vertice<String>> camino = new ListaEnlazadaGenerica<Vertice<String>>();
-		boolean[] marcas = new boolean[mapaCiudades.listaDeVertices().tamanio()];
+		boolean[] marcas = new boolean[mapaCiudades.listaDeVertices().tamanio() + 1];
 
 		Vertice<String> v1 = buscarCiudad(ciudad1);
 
@@ -161,13 +161,65 @@ public class Mapa {
 
 	}
 
-	private <T> void clonar(ListaGenerica<T> camino, ListaGenerica<T> caminoMin) {
-		while (!caminoMin.esVacia())
-			caminoMin.eliminarEn(1);
+	public ListaGenerica<Vertice<String>> caminoConMenorCargaDeCombustible(String ciudad1, String ciudad2,
+			int tanqueAuto) {
+		ListaGenerica<Vertice<String>> camino = new ListaEnlazadaGenerica<Vertice<String>>();
+		ListaGenerica<Vertice<String>> mejorCamino = new ListaEnlazadaGenerica<Vertice<String>>();
+		boolean[] marcas = new boolean[mapaCiudades.listaDeVertices().tamanio() + 1];
 
-		camino.comenzar();
-		while (!camino.fin()) {
-			caminoMin.agregarFinal(camino.proximo());
+		int[] menorCarga = { 2 }; // con 2 alcanza
+		Vertice<String> v1 = buscarCiudad(ciudad1);
+
+		if (v1 != null && buscarCiudad(ciudad2) != null)
+			dfsConMenorCargaDeCombustible(v1, ciudad2, marcas, camino, mejorCamino, tanqueAuto, tanqueAuto, 1,
+					menorCarga);
+
+		return mejorCamino;
+
+	}
+
+	private void dfsConMenorCargaDeCombustible(Vertice<String> v, String c2, boolean[] marcas,
+			ListaGenerica<Vertice<String>> caminoActual, ListaGenerica<Vertice<String>> mejorCamino, int tanqueLleno,
+			int tanqueActual, int cargas, int[] menorCarga) {
+
+		caminoActual.agregarFinal(v);
+		marcas[v.getPosicion()] = true;
+		if (v.dato().equals(c2)) {
+			if (cargas < menorCarga[0]) {
+				menorCarga[0] = cargas;
+				clonar(caminoActual, mejorCamino);
+			}
+
+		} else {
+			ListaGenerica<Arista<String>> ady = mapaCiudades.listaDeAdyacentes(v);
+			ady.comenzar();
+			while (!ady.fin()) {
+				Arista<String> arista = ady.proximo();
+				Vertice<String> vertice = arista.verticeDestino();
+				if (!marcas[vertice.getPosicion()] && (arista.peso() <= tanqueLleno)) {
+
+					if (tanqueActual < arista.peso()) {
+						cargas++;
+						tanqueActual = tanqueLleno;
+					}
+					dfsConMenorCargaDeCombustible(vertice, c2, marcas, caminoActual, mejorCamino, tanqueLleno,
+							tanqueActual, cargas, menorCarga);
+
+				}
+			}
+		}
+		marcas[v.getPosicion()] = false;
+		caminoActual.eliminarEn(caminoActual.tamanio());
+
+	}
+
+	private <T> void clonar(ListaGenerica<T> caminoOrigen, ListaGenerica<T> caminoDestino) {
+		while (!caminoDestino.esVacia())
+			caminoDestino.eliminarEn(1);
+
+		caminoOrigen.comenzar();
+		while (!caminoOrigen.fin()) {
+			caminoDestino.agregarFinal(caminoOrigen.proximo());
 		}
 
 	}
