@@ -141,11 +141,11 @@ public class TestGrafoImplListAdy {
 	public void testVetice() {
 		VerticeImplListAdy<Integer> vert1 = new VerticeImplListAdy<Integer>(1);
 		grafo.agregarVertice(vert1);
-		assertEquals(grafo.vetice(vert1.getPosicion()),vert1);
+		assertEquals(grafo.vertice(vert1.getPosicion()),vert1);
 		
 		VerticeImplListAdy<Integer> vert2 = new VerticeImplListAdy<Integer>(1);
 		grafo.agregarVertice(vert2);
-		assertEquals(grafo.vetice(vert2.getPosicion()),vert2);
+		assertEquals(grafo.vertice(vert2.getPosicion()),vert2);
 	}
 
 }

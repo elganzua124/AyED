@@ -138,11 +138,11 @@ public class TestGrafoImplMatrizAdy{
 	public void testVetice() {
 		VerticeImplMatrizAdy<Integer> vert1 = new VerticeImplMatrizAdy<Integer>(1);
 		grafo.agregarVertice(vert1);
-		assertEquals(grafo.vetice(vert1.getPosicion()),vert1);
+		assertEquals(grafo.vertice(vert1.getPosicion()),vert1);
 		
 		VerticeImplMatrizAdy<Integer> vert2 = new VerticeImplMatrizAdy<Integer>(1);
 		grafo.agregarVertice(vert2);
-		assertEquals(grafo.vetice(vert2.getPosicion()),vert2);
+		assertEquals(grafo.vertice(vert2.getPosicion()),vert2);
 	}
 
 }
