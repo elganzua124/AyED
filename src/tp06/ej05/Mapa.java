@@ -181,7 +181,6 @@ public class Mapa {
 	private void dfsConMenorCargaDeCombustible(Vertice<String> v, String c2, boolean[] marcas,
 			ListaGenerica<Vertice<String>> caminoActual, ListaGenerica<Vertice<String>> mejorCamino, int tanqueLleno,
 			int tanqueActual, int cargas, int[] menorCarga) {
-
 		caminoActual.agregarFinal(v);
 		marcas[v.getPosicion()] = true;
 		if (v.dato().equals(c2)) {
@@ -189,7 +188,6 @@ public class Mapa {
 				menorCarga[0] = cargas;
 				clonar(caminoActual, mejorCamino);
 			}
-
 		} else {
 			ListaGenerica<Arista<String>> ady = mapaCiudades.listaDeAdyacentes(v);
 			ady.comenzar();
@@ -197,20 +195,19 @@ public class Mapa {
 				Arista<String> arista = ady.proximo();
 				Vertice<String> vertice = arista.verticeDestino();
 				if (!marcas[vertice.getPosicion()] && (arista.peso() <= tanqueLleno)) {
-
+					int cargo = cargas;
 					if (tanqueActual < arista.peso()) {
-						cargas++;
+						cargo++;
 						tanqueActual = tanqueLleno;
 					}
+					tanqueActual -= arista.peso();
 					dfsConMenorCargaDeCombustible(vertice, c2, marcas, caminoActual, mejorCamino, tanqueLleno,
-							tanqueActual, cargas, menorCarga);
-
+							tanqueActual, cargo, menorCarga);
 				}
 			}
 		}
 		marcas[v.getPosicion()] = false;
 		caminoActual.eliminarEn(caminoActual.tamanio());
-
 	}
 
 	private <T> void clonar(ListaGenerica<T> caminoOrigen, ListaGenerica<T> caminoDestino) {
