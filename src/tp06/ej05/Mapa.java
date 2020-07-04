@@ -195,14 +195,15 @@ public class Mapa {
 				Arista<String> arista = ady.proximo();
 				Vertice<String> vertice = arista.verticeDestino();
 				if (!marcas[vertice.getPosicion()] && (arista.peso() <= tanqueLleno)) {
-					int cargo = cargas;
+
 					if (tanqueActual < arista.peso()) {
-						cargo++;
-						tanqueActual = tanqueLleno;
-					}
-					tanqueActual -= arista.peso();
-					dfsConMenorCargaDeCombustible(vertice, c2, marcas, caminoActual, mejorCamino, tanqueLleno,
-							tanqueActual, cargo, menorCarga);
+
+						dfsConMenorCargaDeCombustible(vertice, c2, marcas, caminoActual, mejorCamino, tanqueLleno,
+								tanqueLleno - arista.peso(), cargas + 1, menorCarga);
+					} else
+
+						dfsConMenorCargaDeCombustible(vertice, c2, marcas, caminoActual, mejorCamino, tanqueLleno,
+								tanqueActual - arista.peso(), cargas, menorCarga);
 				}
 			}
 		}
