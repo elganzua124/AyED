@@ -70,22 +70,21 @@ public class Parcial_04_07_2020 {
 			ListaGenerica<String> cam = new ListaEnlazadaGenerica<String>();
 			clonar(camino, cam);
 			caminos.agregarFinal(cam);
-			return;
+
+		} else {
+			marcas[v.getPosicion()] = true;
+
+			ListaGenerica<Arista<String>> adyacentes = mapaCiudades.listaDeAdyacentes(v);
+			adyacentes.comenzar();
+			while (!adyacentes.fin()) {
+
+				Vertice<String> vertice = adyacentes.proximo().verticeDestino();
+
+				if (!marcas[vertice.getPosicion()] && !evitarPasarPor.incluye(vertice.dato()))
+
+					dfs(vertice, destino, marcas, caminos, camino, evitarPasarPor);
+			}
 		}
-
-		marcas[v.getPosicion()] = true;
-
-		ListaGenerica<Arista<String>> adyacentes = mapaCiudades.listaDeAdyacentes(v);
-		adyacentes.comenzar();
-		while (!adyacentes.fin()) {
-
-			Vertice<String> vertice = adyacentes.proximo().verticeDestino();
-
-			if (!marcas[vertice.getPosicion()] && !evitarPasarPor.incluye(vertice.dato()))
-
-				dfs(vertice, destino, marcas, caminos, camino, evitarPasarPor);
-		}
-
 		camino.eliminarEn(camino.tamanio());
 
 	}
@@ -167,21 +166,16 @@ public class Parcial_04_07_2020 {
 		grafo.conectar(j, i);
 		grafo.conectar(k, i);
 
-		Parcial_04_07_2020 lugares = new Parcial_04_07_2020();
+		Parcial_04_07_2020 ciudades = new Parcial_04_07_2020();
 
 		ListaGenerica<String> evitarPasarPor = new ListaEnlazadaGenerica<String>();
 		evitarPasarPor.agregarFinal("Quilmes");
 		evitarPasarPor.agregarFinal("Lobos");
-		ListaGenerica<ListaGenerica<String>> res = lugares.resolver(grafo, "La Plata", "Suipacha", evitarPasarPor);
+		ListaGenerica<ListaGenerica<String>> res = ciudades.resolver(grafo, "La Plata", "Suipacha", evitarPasarPor);
 
 		res.comenzar();
-		System.out.print(res.tamanio());
-		while (!res.fin()) {
-			ListaGenerica<String> l=res.proximo();
-			l.comenzar();
-			System.out.print(l.proximo());
-		}
-			
 
+		while (!res.fin())
+			System.out.println(res.proximo());
 	}
 }

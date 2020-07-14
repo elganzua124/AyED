@@ -50,7 +50,7 @@ public class VisitaOslo {
 					encontre = dfs(ady, destino, marcas, camino, maxTiempo, tiempo, lugaresRestringidos);
 		}
 		if (!encontre) {
-			marcas[v.getPosicion()] = false; // es necesario?
+			marcas[v.getPosicion()] = false; //es necesario?
 			camino.eliminarEn(camino.tamanio());
 		}
 
@@ -128,7 +128,7 @@ public class VisitaOslo {
 		// grafo.conectar( j, , );
 		// grafo.conectar( j, , );
 		grafo.conectar(k, j, 15);
-		// grafo.conectar( k, , );
+		grafo.conectar(j, n, 10);
 		// grafo.conectar( k, , );
 		// grafo.conectar( k, , );
 		grafo.conectar(l, i, 5);
@@ -148,6 +148,8 @@ public class VisitaOslo {
 		ListaGenerica<String> lugaresRestringidos = new ListaEnlazadaGenerica<String>();
 		lugaresRestringidos.agregarFinal("Akker Brigge");
 		lugaresRestringidos.agregarFinal("Palacio Real");
+		lugaresRestringidos.agregarFinal("Museo Munch"); // cancela el camino por El Tigre, y sigue por el Parque
+															// Botanico
 		ListaGenerica<String> res = lugares.paseoEnBici(grafo, "Museo Vikingo", 120, lugaresRestringidos);
 
 		System.out.print(res);
