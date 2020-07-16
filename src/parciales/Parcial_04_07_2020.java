@@ -7,7 +7,6 @@ import estructuras.grafo.Vertice;
 import estructuras.grafo.VerticeImplListAdy;
 import estructuras.listas.ListaEnlazadaGenerica;
 import estructuras.listas.ListaGenerica;
-import tp06.ej06.VisitaOslo;
 
 /*
  * Implemente la clase Parcial,y el método:

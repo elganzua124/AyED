@@ -7,7 +7,7 @@ import estructuras.listas.*;
 public class Recorridos<T> {
 
 	public ListaGenerica<Vertice<T>> dfs(Grafo<T> grafo) {
-		int tam = grafo.listaDeVertices().tamanio() + 1;
+		int tam = grafo.listaDeVertices().tamanio();
 		boolean[] marcas = new boolean[tam];
 		ListaGenerica<Vertice<T>> lista = new ListaEnlazadaGenerica<Vertice<T>>();
 		lista.comenzar();

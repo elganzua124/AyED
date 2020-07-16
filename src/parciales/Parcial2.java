@@ -10,7 +10,7 @@ import estructuras.listas.ListaGenerica;
 /*
  * Implemente la clase Parcial y el método
 	
-	??? resolver (Grafo<???> ciudades, String origen, String destino )
+	??? resolver (Grafo<???> ciudades, String origen, String destino)
 
 			
 	Se quiere calcular el máximo tiempo en tránsito desde una ciudad origen hacia una ciudad destino,
@@ -37,7 +37,7 @@ public class Parcial2 {
 
 	private class Ciudad {
 
-		public Ciudad(String nombre, int diasTransito) {
+		private Ciudad(String nombre, int diasTransito) {
 			super();
 			this.nombre = nombre;
 			this.diasTransito = diasTransito;
