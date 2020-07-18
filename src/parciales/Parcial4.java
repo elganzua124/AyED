@@ -31,11 +31,13 @@ import estructuras.listas.ListaGenerica;
  * 
  *         - Debe verificar la existencia de la ciudad origen y la ciudad
  *         destino.
+ * 
+ *         - No se puede pasar 2 veces por el mismo lugar.
+ * 
+ *         - En caso de no existir un camino posible, deve devolver el valor más
+ *         adecuado que se ajuste a lo solicitado.
  *         
- *         - No se puede pasar 2 veces por el mismo lugar. - En caso de
- *         no existir un camino posible, deve devolver el valor más adecuado que
- *         se ajuste a lo solicitado. - Use los métodos de Grafo y Listas visto
- *         en clase.
+ *         - Use los métodos de Grafo y Listas visto en clase.
  * 
  */
 
@@ -92,11 +94,11 @@ public class Parcial4 {
 				incluye = dfs(ady, destino, marcas, camino, pasandoPor);
 			}
 		}
-
-		if (!incluye) {
+		
+		marcas[v.getPosicion()] = false;
+		
+		if (!incluye) 
 			camino.eliminarEn(camino.tamanio());
-			marcas[v.getPosicion()] = false;
-		}
 
 		return incluye;
 

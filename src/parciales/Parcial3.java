@@ -6,6 +6,25 @@ import estructuras.grafo.Vertice;
 import estructuras.listas.ListaEnlazadaGenerica;
 import estructuras.listas.ListaGenerica;
 
+/*
+ * Se tiene un grafo que representa el mapa de un juego de búsqueda del tesoro.
+ * Cada vértice representa un escondite, estos poseen una o varias pistas que
+ * llevan a los escondites siguientes, las aristas representan las pistas. Hay
+ * escondites terminales, que no tienen pistas y que contienen tesoros (no
+ * tienen adyacentes).
+ * De cada escondite se tiene un nombre que lo identifica, la complejidad de
+ * poder abrirlo (Alta, Media, Baja) y la profundidad que está enterrado en
+ * centímetros. El mapa parte de un vértice distinguido que es el único que
+ * está a profundidad cero.
+ * Implemente la clase Parcial y el método:
+ * 
+ *  ListaGenerica<???> resolver(Grafo<???> mapa)
+ *  
+ *  El método recibe como parámetro un mapa y retorna el camino cuyo promedio
+ *  de profundidad de los escondites sea mayor.
+ *  
+ */
+
 public class Parcial3 {
 
 	private Grafo<Escondite> mapa;
@@ -48,7 +67,7 @@ public class Parcial3 {
 		Vertice<Escondite> v = buscarPartidaCero();
 		if (v != null) {
 			ListaGenerica<Escondite> caminoActual = new ListaEnlazadaGenerica<Escondite>();
-			
+
 			boolean[] marcas = new boolean[mapa.listaDeVertices().tamanio() + 1];
 
 			float[] promedio = { 0 };
@@ -63,7 +82,7 @@ public class Parcial3 {
 			ListaGenerica<Escondite> camino, int prof, float[] prom) {
 
 		caminoActual.agregarFinal(v.dato());
-		marcas[v.getPosicion()] = true;
+
 		prof += v.dato().getProfundidad();
 
 		if (mapa.listaDeAdyacentes(v).esVacia()) {
@@ -72,22 +91,23 @@ public class Parcial3 {
 				prom[0] = p;
 				clonar(caminoActual, camino);
 			}
-		} else {
+			return;
+		}
+		marcas[v.getPosicion()] = true;
 
-			ListaGenerica<Arista<Escondite>> adyacentes = mapa.listaDeAdyacentes(v);
-			adyacentes.comenzar();
-			while (!adyacentes.fin()) {
+		ListaGenerica<Arista<Escondite>> adyacentes = mapa.listaDeAdyacentes(v);
+		adyacentes.comenzar();
+		while (!adyacentes.fin()) {
 
-				Vertice<Escondite> vertice = adyacentes.proximo().verticeDestino();
+			Vertice<Escondite> vertice = adyacentes.proximo().verticeDestino();
 
-				if (!marcas[vertice.getPosicion()])
-					dfs(vertice, marcas, caminoActual, camino, prof, prom);
-
-			}
+			if (!marcas[vertice.getPosicion()])
+				dfs(vertice, marcas, caminoActual, camino, prof, prom);
 
 		}
+
 		marcas[v.getPosicion()] = false;
-		camino.eliminarEn(v.getPosicion());
+		caminoActual.eliminarEn(v.getPosicion());
 
 	}
 
