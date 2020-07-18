@@ -91,22 +91,23 @@ public class Parcial3 {
 				prom[0] = p;
 				clonar(caminoActual, camino);
 			}
-			return;
+
+		} else {
+			marcas[v.getPosicion()] = true;
+
+			ListaGenerica<Arista<Escondite>> adyacentes = mapa.listaDeAdyacentes(v);
+			adyacentes.comenzar();
+			while (!adyacentes.fin()) {
+
+				Vertice<Escondite> vertice = adyacentes.proximo().verticeDestino();
+
+				if (!marcas[vertice.getPosicion()])
+					dfs(vertice, marcas, caminoActual, camino, prof, prom);
+
+			}
+			marcas[v.getPosicion()] = false;
 		}
-		marcas[v.getPosicion()] = true;
 
-		ListaGenerica<Arista<Escondite>> adyacentes = mapa.listaDeAdyacentes(v);
-		adyacentes.comenzar();
-		while (!adyacentes.fin()) {
-
-			Vertice<Escondite> vertice = adyacentes.proximo().verticeDestino();
-
-			if (!marcas[vertice.getPosicion()])
-				dfs(vertice, marcas, caminoActual, camino, prof, prom);
-
-		}
-
-		marcas[v.getPosicion()] = false;
 		caminoActual.eliminarEn(v.getPosicion());
 
 	}
