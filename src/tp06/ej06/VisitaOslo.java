@@ -45,12 +45,16 @@ public class VisitaOslo {
 			Vertice<String> ady = arista.verticeDestino();
 			int tiempo = tiempoActual + arista.peso();
 
-			if (!marcas[ady.getPosicion()] && !lugaresRestringidos.incluye(ady.dato()))
+			if (!marcas[ady.getPosicion()] && !lugaresRestringidos.incluye(ady.dato())) {
+				
+				if(camino.incluye(ady.dato()))
+					System.out.print("maal");
 				if (tiempo <= maxTiempo)
 					encontre = dfs(ady, destino, marcas, camino, maxTiempo, tiempo, lugaresRestringidos);
+			}
 		}
 		if (!encontre) {
-			marcas[v.getPosicion()] = false; //es necesario?
+			marcas[v.getPosicion()] = false; // es necesario?
 			camino.eliminarEn(camino.tamanio());
 		}
 
