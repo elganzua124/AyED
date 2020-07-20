@@ -1,4 +1,4 @@
-package parciales.parcial_18_07_2020;
+package parciales_y_extras.parcial_18_07_2020;
 
 import estructuras.listas.ListaEnlazadaGenerica;
 import estructuras.listas.ListaGenerica;

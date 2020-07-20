@@ -1,4 +1,4 @@
-package parciales.parcial_18_07_2020;
+package parciales_y_extras.parcial_18_07_2020;
 
 import estructuras.grafo.Arista;
 import estructuras.grafo.Grafo;
@@ -74,7 +74,9 @@ public class Parcial_18_07_2020 {
 			if (!marcas[vertice.getPosicion()] && gastado <= mejor.maxMonto()) {
 
 				dfs(ciudades, vertice, marcas, caminoActual, gastado, mejor);
-				// saliendo de la recursion, acá está mi caso base!
+				// saliendo de la recursion, acá está mi caso base,
+				// cuando ya evalué todos mis adyacentes y caminoActual
+				// tiene el mejor candidato
 				if (caminoActual.tamanio() > mejor.getRecorrido().tamanio())
 					mejor.cambiarRecorrido(caminoActual, gastado);
 				else if (caminoActual.tamanio() == mejor.getRecorrido().tamanio())
@@ -82,14 +84,11 @@ public class Parcial_18_07_2020 {
 						mejor.cambiarRecorrido(caminoActual, gastado);
 
 				caminoActual.eliminarEn(caminoActual.tamanio());
-
 			}
 			gastado -= arista.peso();
-
 		}
 
 		marcas[v.getPosicion()] = false;
-
 	}
 
 	private <T> Vertice<T> buscarSitio(Grafo<T> grafo, String ciudad) {
@@ -101,14 +100,14 @@ public class Parcial_18_07_2020 {
 			if (v.dato().equals(ciudad))
 				return v;
 		}
-		return v;
 
+		return v;
 	}
 
 	public static void main(String[] args) {
 
 		Grafo<String> grafo = new GrafoImplListAdy<String>();
-		Parcial_18_07_2020 ciudades = new Parcial_18_07_2020();
+		Parcial_18_07_2020 parcial = new Parcial_18_07_2020();
 
 		Vertice<String> a = new VerticeImplListAdy<String>("Quilmes");
 		Vertice<String> b = new VerticeImplListAdy<String>("La Plata");
@@ -159,7 +158,7 @@ public class Parcial_18_07_2020 {
 		grafo.conectar(j, i, 25);
 		grafo.conectar(k, i, 110);
 
-		MejorRecorrido<String> mejorCamino = ciudades.resolver(grafo, "La Plata", 500);
+		MejorRecorrido<String> mejorCamino = parcial.resolver(grafo, "La Plata", 500);
 		System.out.println(mejorCamino);
 
 	}

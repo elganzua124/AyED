@@ -1,4 +1,4 @@
-package parciales;
+package parciales_y_extras;
 
 import estructuras.grafo.Arista;
 import estructuras.grafo.Grafo;
