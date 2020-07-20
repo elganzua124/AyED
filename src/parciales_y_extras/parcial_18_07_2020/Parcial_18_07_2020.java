@@ -53,8 +53,9 @@ public class Parcial_18_07_2020 {
 	/*
 	 * Lo que realmente me bugeó fue que el caso base me resultó dificil de
 	 * trabajarlo. De todos los parciales y ejercicios que hice para repasar ninguno
-	 * me sirvió para resolverlo. Esta es la solución que pude hacer 24hs después y
-	 * con las neuronas sobrevivientes...
+	 * me sirvió para resolverlo. Para que sea el ultimo nodo (caso base) del
+	 * camino, todos sus adyacentes no deben ser alcanzables. Esta es la solución
+	 * que pude hacer 24hs después y con las neuronas sobrevivientes...
 	 */
 	private void dfs(Grafo<String> ciudades, Vertice<String> v, boolean[] marcas, ListaGenerica<String> caminoActual,
 			int gastado, MejorRecorrido<String> mejor) {
