@@ -53,19 +53,20 @@ public class Parcial_18_07_2020 {
 	/*
 	 * Lo que realmente me bugeó fue que el caso base me resultó dificil de
 	 * trabajarlo. De todos los parciales y ejercicios que hice para repasar ninguno
-	 * me sirvió para resolverlo. Para que sea el ultimo nodo (caso base) del
-	 * camino, todos sus adyacentes no deben ser alcanzables. Esta es la solución
-	 * que pude hacer 24hs después y con las neuronas sobrevivientes...
+	 * me sirvió para resolverlo. Para que sea el último nodo del camino, todos sus
+	 * adyacentes no deben ser alcanzables, ya que no hay dinero suficiente para
+	 * pagar el peaje de alguna de las ciudades adyacentes. Esta es la solución que
+	 * pude hacer con las neuronas sobrevivientes, 24hs después.
 	 */
 	private void dfs(Grafo<String> ciudades, Vertice<String> v, boolean[] marcas, ListaGenerica<String> caminoActual,
 			int gastado, MejorRecorrido<String> mejor) {
 
+		marcas[v.getPosicion()] = true;
 		caminoActual.agregarFinal(v.dato());
 
 		ListaGenerica<Arista<String>> ady = ciudades.listaDeAdyacentes(v);
 		ady.comenzar();
 
-		marcas[v.getPosicion()] = true;
 		while (!ady.fin()) {
 
 			Arista<String> arista = ady.proximo();
@@ -75,7 +76,7 @@ public class Parcial_18_07_2020 {
 			if (!marcas[vertice.getPosicion()] && gastado <= mejor.maxMonto()) {
 
 				dfs(ciudades, vertice, marcas, caminoActual, gastado, mejor);
-				// saliendo de la recursion, acá está mi caso base,
+				// saliendo de la recursión, acá está mi caso base,
 				// cuando ya evalué todos mis adyacentes y caminoActual
 				// tiene el mejor candidato
 				if (caminoActual.tamanio() > mejor.getRecorrido().tamanio())

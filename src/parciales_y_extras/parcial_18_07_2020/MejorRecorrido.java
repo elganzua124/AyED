@@ -51,11 +51,13 @@ public class MejorRecorrido<T> {
 
 	@Override
 	public String toString() {
-		String str = "Mejor recorrido:\n\n";
+		String str = "Fondos: $" + maxMonto() + "\n\n";
+
+		str += "Mejor recorrido:\n\n";
 
 		str += mejorRecorrido.toString() + "\n\n";
 
-		str += "Sin gastar: $" + sinGastar();
+		str += "Se ahorra: $" + sinGastar();
 
 		return str;
 	}
