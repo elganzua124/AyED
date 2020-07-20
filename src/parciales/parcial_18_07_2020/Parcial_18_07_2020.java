@@ -34,6 +34,7 @@ import estructuras.listas.ListaGenerica;
 public class Parcial_18_07_2020 {
 
 	public MejorRecorrido<String> resolver(Grafo<String> ciudades, String origen, int maxMonto) {
+
 		MejorRecorrido<String> mejor = new MejorRecorrido<String>(maxMonto);
 
 		Vertice<String> v = buscarSitio(ciudades, origen);
@@ -49,6 +50,12 @@ public class Parcial_18_07_2020 {
 		return mejor;
 	}
 
+	/*
+	 * Lo que realmente me bugeó fue que el caso base me resultó dificil de
+	 * trabajarlo. De todos los parciales y ejercicios que hice para repasar ninguno
+	 * me sirvió para resolverlo. Esta es la solución que pude hacer 24hs después y
+	 * con las neuronas sobrevivientes...
+	 */
 	private void dfs(Grafo<String> ciudades, Vertice<String> v, boolean[] marcas, ListaGenerica<String> caminoActual,
 			int gastado, MejorRecorrido<String> mejor) {
 
@@ -67,7 +74,7 @@ public class Parcial_18_07_2020 {
 			if (!marcas[vertice.getPosicion()] && gastado <= mejor.maxMonto()) {
 
 				dfs(ciudades, vertice, marcas, caminoActual, gastado, mejor);
-				// saliendo de la recursion
+				// saliendo de la recursion, acá está mi caso base!
 				if (caminoActual.tamanio() > mejor.getRecorrido().tamanio())
 					mejor.cambiarRecorrido(caminoActual, gastado);
 				else if (caminoActual.tamanio() == mejor.getRecorrido().tamanio())
@@ -152,9 +159,8 @@ public class Parcial_18_07_2020 {
 		grafo.conectar(j, i, 25);
 		grafo.conectar(k, i, 110);
 
-		MejorRecorrido<String> rta = ciudades.resolver(grafo, "La Plata", 500);
-		System.out.println(rta.getRecorrido());
-		System.out.println(rta.sinGastar());
+		MejorRecorrido<String> mejorCamino = ciudades.resolver(grafo, "La Plata", 500);
+		System.out.println(mejorCamino);
 
 	}
 
