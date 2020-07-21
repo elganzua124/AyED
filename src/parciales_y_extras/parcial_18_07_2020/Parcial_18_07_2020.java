@@ -51,12 +51,11 @@ public class Parcial_18_07_2020 {
 	}
 
 	/*
-	 * Lo que realmente me bugeó fue que el caso base me resultó dificil de
-	 * trabajarlo. De todos los parciales y ejercicios que hice para repasar ninguno
-	 * me sirvió para resolverlo. Para que sea el último nodo del camino, todos sus
+	 * De todos los parciales y ejercicios que hice para repasar ninguno me
+	 * sirvió para resolverlo. Para que sea el último nodo del camino, todos sus
 	 * adyacentes no deben ser alcanzables, ya que no hay dinero suficiente para
-	 * pagar el peaje de alguna de las ciudades adyacentes. Esta es la solución que
-	 * pude hacer con las neuronas sobrevivientes, 24hs después.
+	 * pagar el peaje de alguna de las ciudades adyacentes. Es decir que el
+	 * recorrido hay que hacerlo postorden.
 	 */
 	private void dfs(Grafo<String> ciudades, Vertice<String> v, boolean[] marcas, ListaGenerica<String> caminoActual,
 			int gastado, MejorRecorrido<String> mejor) {
@@ -71,23 +70,21 @@ public class Parcial_18_07_2020 {
 
 			Arista<String> arista = ady.proximo();
 			Vertice<String> vertice = arista.verticeDestino();
-			gastado += arista.peso();
+			int aGastar = gastado + arista.peso();
 
-			if (!marcas[vertice.getPosicion()] && gastado <= mejor.maxMonto()) {
+			if (!marcas[vertice.getPosicion()] && aGastar <= mejor.maxMonto()) {
 
-				dfs(ciudades, vertice, marcas, caminoActual, gastado, mejor);
-				// saliendo de la recursión, acá está mi caso base,
-				// cuando ya evalué todos mis adyacentes y caminoActual
+				dfs(ciudades, vertice, marcas, caminoActual, aGastar, mejor);
+				// ya evalué todos mis adyacentes y caminoActual
 				// tiene el mejor candidato
 				if (caminoActual.tamanio() > mejor.getRecorrido().tamanio())
-					mejor.cambiarRecorrido(caminoActual, gastado);
+					mejor.cambiarRecorrido(caminoActual, aGastar);
 				else if (caminoActual.tamanio() == mejor.getRecorrido().tamanio())
-					if (mejor.gastado() > gastado)
-						mejor.cambiarRecorrido(caminoActual, gastado);
+					if (aGastar < mejor.gastado())
+						mejor.cambiarRecorrido(caminoActual, aGastar);
 
 				caminoActual.eliminarEn(caminoActual.tamanio());
 			}
-			gastado -= arista.peso();
 		}
 
 		marcas[v.getPosicion()] = false;
