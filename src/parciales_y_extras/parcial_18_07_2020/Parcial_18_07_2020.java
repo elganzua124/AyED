@@ -76,7 +76,7 @@ public class Parcial_18_07_2020 {
 
 				dfs(ciudades, vertice, marcas, caminoActual, aGastar, mejor);
 				// ya evalué todos mis adyacentes y caminoActual
-				// tiene el mejor candidato
+				// tiene el mejor candidato a evaluar
 				if (caminoActual.tamanio() > mejor.getRecorrido().tamanio())
 					mejor.cambiarRecorrido(caminoActual, aGastar);
 				else if (caminoActual.tamanio() == mejor.getRecorrido().tamanio())
