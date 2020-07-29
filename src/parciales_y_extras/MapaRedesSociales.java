@@ -22,6 +22,8 @@ import estructuras.listas.ListaGenerica;
  * cuáles son los grupos de amigos que hay en la red social Facebook.
  */
 
+// si fuese un grafo dirigido, debería usar Kosaraju
+
 public class MapaRedesSociales {
 
 	private Grafo<Character> grafo;
