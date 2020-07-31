@@ -26,13 +26,17 @@ public class Mapa {
 	}
 
 	private boolean dfs(Vertice<String> v1, String c2, boolean[] marcas, ListaGenerica<Vertice<String>> camino) {
-		marcas[v1.getPosicion()] = true;
 
 		camino.agregarFinal(v1);
 		if (v1.dato().equals(c2)) {
 			return true;
 		}
+
+		marcas[v1.getPosicion()] = true;
+
 		ListaGenerica<Arista<String>> ady = mapaCiudades.listaDeAdyacentes(v1);
+		ady.comenzar();
+
 		boolean encontre = false;
 		while (!ady.fin() && !encontre) {
 			Vertice<String> a = ady.proximo().verticeDestino();
@@ -40,6 +44,9 @@ public class Mapa {
 			if (!marcas[a.getPosicion()])
 				encontre = dfs(a, c2, marcas, camino);
 		}
+
+		marcas[v1.getPosicion()] = false;
+
 		if (!encontre)
 			camino.eliminarEn(camino.tamanio());
 		return encontre;
