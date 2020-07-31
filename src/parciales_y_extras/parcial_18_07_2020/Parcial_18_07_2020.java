@@ -51,11 +51,9 @@ public class Parcial_18_07_2020 {
 	}
 
 	/*
-	 * De todos los parciales y ejercicios que hice para repasar ninguno me
-	 * sirvió para resolverlo. Para que sea el último nodo del camino, todos sus
-	 * adyacentes no deben ser alcanzables, ya que no hay dinero suficiente para
-	 * pagar el peaje de alguna de las ciudades adyacentes. Es decir que el
-	 * recorrido hay que hacerlo postorden.
+	 * Para que sea el último nodo del camino, todos sus adyacentes no deben ser
+	 * alcanzables, ya que no hay dinero suficiente para pagar el peaje de alguna de
+	 * las ciudades adyacentes. Es decir que el recorrido hay que hacerlo postorden.
 	 */
 	private void dfs(Grafo<String> ciudades, Vertice<String> v, boolean[] marcas, ListaGenerica<String> caminoActual,
 			int gastado, MejorRecorrido<String> mejor) {

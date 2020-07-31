@@ -1,5 +1,11 @@
 package parciales_y_extras;
 
+import estructuras.grafo.Arista;
+import estructuras.grafo.Grafo;
+import estructuras.grafo.Vertice;
+import estructuras.listas.ListaEnlazadaGenerica;
+import estructuras.listas.ListaGenerica;
+
 /**
  *
  * ¿Es sólo una moda o vino para quedarse? No se sabe, pero como parte de un
@@ -23,5 +29,73 @@ package parciales_y_extras;
  */
 
 public class Parcial_29_06_2013 {
-	// hacer
+	/*
+	 * Una arista es una cuadra, su peso es la cantidad de cafes en la cuadra Los
+	 * vertices son las esquinas x: cantidad de cuadras que una persona esta
+	 * dispuesta a caminar y: cantidad de cafes que hay que superar para que la
+	 * esquina sea valiosa.
+	 * 
+	 */
+
+	public <T> boolean es_valiosa(Grafo<T> mapa, T origen, int x, int y) {
+
+		boolean es_valiosa = false;
+
+		Vertice<T> v = buscarEsquina(mapa, origen);
+
+		if (v != null) {
+
+			boolean[] marcas = new boolean[mapa.listaDeVertices().tamanio() + 1];
+
+			es_valiosa = dfs(mapa, v, marcas, x, y, 0, 0);
+
+		}
+
+		return es_valiosa;
+	}
+
+	private <T> boolean dfs(Grafo<T> mapa, Vertice<T> v, boolean[] marcas, int x, int y, int acum_cafes, int caminado) {
+
+		if (acum_cafes > y)
+			return true;
+
+		if (caminado == x) // no tiene sentido visitar sus adyacentes
+			return false;
+
+		marcas[v.getPosicion()] = true;
+		boolean cumple = false;
+
+		ListaGenerica<Arista<T>> ady = mapa.listaDeAdyacentes(v);
+		ady.comenzar();
+
+		while (!ady.fin() && !cumple) {
+
+			Arista<T> arista = ady.proximo();
+			Vertice<T> vertice = arista.verticeDestino();
+
+			if (!marcas[vertice.getPosicion()]) {
+				int cafes = acum_cafes + arista.peso();
+				cumple = dfs(mapa, vertice, marcas, x, y, cafes, caminado + 1);
+			}
+
+		}
+
+		marcas[v.getPosicion()] = false;
+
+		return cumple;
+	}
+
+	private <T> Vertice<T> buscarEsquina(Grafo<T> grafo, T ciudad) {
+		ListaGenerica<Vertice<T>> vertices = grafo.listaDeVertices();
+		Vertice<T> v = null;
+		vertices.comenzar();
+		while (!vertices.fin()) {
+			v = vertices.proximo();
+			if (v.dato().equals(ciudad))
+				return v;
+		}
+
+		return v;
+	}
+
 }
