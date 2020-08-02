@@ -8,48 +8,50 @@ public class Recorridos<T> {
 
 	public ListaGenerica<Vertice<T>> dfs(Grafo<T> grafo) {
 		int tam = grafo.listaDeVertices().tamanio();
-		boolean[] marcas = new boolean[tam];
+		boolean[] marcas = new boolean[tam + 1];
 		ListaGenerica<Vertice<T>> lista = new ListaEnlazadaGenerica<Vertice<T>>();
 		lista.comenzar();
 		for (int i = 1; i <= tam; i++) {
 			if (!marcas[i]) {
-				dfs(grafo, marcas, i, lista);
+				dfs(grafo, marcas, lista.proximo(), lista);
 			}
 		}
 		return lista;
 	}
 
-	private void dfs(Grafo<T> grafo, boolean[] marcas, int pos, ListaGenerica<Vertice<T>> lista) {
-		marcas[pos] = true;
-		Vertice<T> vertice = grafo.listaDeVertices().elemento(pos);
+	private void dfs(Grafo<T> grafo, boolean[] marcas, Vertice<T> vertice, ListaGenerica<Vertice<T>> lista) {
+		marcas[vertice.getPosicion()] = true;
 		lista.agregarFinal(vertice);
 		ListaGenerica<Arista<T>> listaDeAdyacentes = grafo.listaDeAdyacentes(vertice);
 		listaDeAdyacentes.comenzar();
 		while (!listaDeAdyacentes.fin()) {
-			int j = listaDeAdyacentes.proximo().verticeDestino().getPosicion();
-			if (!marcas[j]) {
-				dfs(grafo, marcas, j, lista);
+			Vertice<T> v = listaDeAdyacentes.proximo().verticeDestino();
+			if (!marcas[v.getPosicion()]) {
+				dfs(grafo, marcas, v, lista);
 			}
 		}
 	}
 
 	public ListaGenerica<Vertice<T>> bfs(Grafo<T> grafo) {
+		
 		ListaGenerica<Vertice<T>> resultado = new ListaEnlazadaGenerica<Vertice<T>>();
 		if (!grafo.esVacio()) {
-			boolean[] visitados = new boolean[grafo.listaDeVertices().tamanio() + 1];
+			
 			ListaGenerica<Vertice<T>> listaDeVertices = grafo.listaDeVertices();
+			int tam = listaDeVertices.tamanio();
+			boolean[] marcas = new boolean[tam + 1];
 			listaDeVertices.comenzar();
-			while (!listaDeVertices.fin()) {
-				Vertice<T> vInicial = grafo.listaDeVertices().proximo();
-				if (!visitados[vInicial.getPosicion()]) {
-					bfs(vInicial, visitados, resultado, grafo);
+			for (int i = 1; i <= tam; i++) {
+				Vertice<T> v = listaDeVertices.proximo();
+				if (!marcas[i]) {
+					bfs(grafo,v, marcas, resultado);
 				}
 			}
 		}
 		return resultado;
 	}
 
-	private void bfs(Vertice<T> vInicial, boolean[] visitados, ListaGenerica<Vertice<T>> resultado, Grafo<T> grafo) {
+	private void bfs(Grafo<T> grafo,Vertice<T> vInicial, boolean[] visitados, ListaGenerica<Vertice<T>> resultado) {
 		ColaGenerica<Vertice<T>> cola = new ColaGenerica<Vertice<T>>();
 		cola.encolar(vInicial);
 		visitados[vInicial.getPosicion()] = true;
