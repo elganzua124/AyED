@@ -56,15 +56,16 @@ public class Parcial2 {
 	}
 
 	public int resolver(Grafo<Ciudad> ciudades, String origen, String destino) {
-		mapaCiudades = ciudades;
-		boolean[] marcas = new boolean[mapaCiudades.listaDeVertices().tamanio() + 1];
+
 		int[] maximoTiempo = { 0 };
 
 		Vertice<Ciudad> v = buscarCiudad(origen);
 
-		if (v != null && buscarCiudad(destino) != null)
+		if (v != null && buscarCiudad(destino) != null) {
+			mapaCiudades = ciudades;
+			boolean[] marcas = new boolean[mapaCiudades.listaDeVertices().tamanio() + 1];
 			resolver(v, destino, marcas, v.dato().getDiastransito(), maximoTiempo);
-
+		}
 		return maximoTiempo[0];
 	}
 

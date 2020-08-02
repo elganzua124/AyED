@@ -90,9 +90,8 @@ public class Mafia {
 				int m = mafias + arista.peso();
 				if (vertice.dato().esMafioso())
 					m++;
-				//if (!marcas[vertice.getPosicion()]) //falta no?
-
-				dfs(vertice, destino, marcas, caminoActual, mejorCamino, menorMafias, m);
+				if (!marcas[vertice.getPosicion()])
+					dfs(vertice, destino, marcas, caminoActual, mejorCamino, menorMafias, m);
 			}
 
 			marcas[v.getPosicion()] = false;

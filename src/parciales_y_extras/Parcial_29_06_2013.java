@@ -3,7 +3,6 @@ package parciales_y_extras;
 import estructuras.grafo.Arista;
 import estructuras.grafo.Grafo;
 import estructuras.grafo.Vertice;
-import estructuras.listas.ListaEnlazadaGenerica;
 import estructuras.listas.ListaGenerica;
 
 /**
@@ -29,13 +28,6 @@ import estructuras.listas.ListaGenerica;
  */
 
 public class Parcial_29_06_2013 {
-	/*
-	 * Una arista es una cuadra, su peso es la cantidad de cafes en la cuadra Los
-	 * vertices son las esquinas x: cantidad de cuadras que una persona esta
-	 * dispuesta a caminar y: cantidad de cafes que hay que superar para que la
-	 * esquina sea valiosa.
-	 * 
-	 */
 
 	public <T> boolean es_valiosa(Grafo<T> mapa, T origen, int x, int y) {
 

@@ -13,6 +13,9 @@ public class Mapa {
 	}
 
 	public ListaGenerica<Vertice<String>> devolverCamino(String ciudad1, String ciudad2) {
+		// Retorna la lista de ciudades que se deben atravesar para ir de ciudad1 a
+		// ciudad2 en caso que se pueda llegar, si no retorna la lista vacía. (Sin tener
+		// en cuenta el combustible).
 
 		ListaGenerica<Vertice<String>> camino = new ListaEnlazadaGenerica<Vertice<String>>();
 
@@ -55,6 +58,10 @@ public class Mapa {
 
 	public ListaGenerica<Vertice<String>> devolverCaminoExceptuando(String ciudad1, String ciudad2,
 			ListaGenerica<String> ciudades) {
+		// Retorna la lista de ciudades que forman un camino desde ciudad1 a ciudad2,
+		// sin pasar por las ciudades que están contenidas en la lista ciudades pasada
+		// por parámetro, si no existe camino retorna la lista vacía. (Sin tener en
+		// cuenta el combustible).
 
 		ListaGenerica<Vertice<String>> camino = new ListaEnlazadaGenerica<Vertice<String>>();
 		boolean[] marcas = new boolean[mapaCiudades.listaDeVertices().tamanio() + 1];
@@ -67,31 +74,34 @@ public class Mapa {
 
 	}
 
-	private boolean dfsExceptuando(Vertice<String> v, String c2, boolean[] marcas,
+	private boolean dfsExceptuando(Vertice<String> vertice, String c2, boolean[] marcas,
 			ListaGenerica<Vertice<String>> camino, ListaGenerica<String> ciudades) {
-		marcas[v.getPosicion()] = true;
-		camino.agregarFinal(v);
-		if (v.dato().equals(c2))
+
+		camino.agregarFinal(vertice);
+		if (vertice.dato().equals(c2))
 			return true;
 		boolean encontre = false;
-		ListaGenerica<Arista<String>> adyacentes = mapaCiudades.listaDeAdyacentes(v);
-		adyacentes.comenzar();
-		while (!adyacentes.fin() && !encontre) {
-			Vertice<String> ady = adyacentes.proximo().verticeDestino();
+		marcas[vertice.getPosicion()] = true;
+		ListaGenerica<Arista<String>> ady = mapaCiudades.listaDeAdyacentes(vertice);
+		ady.comenzar();
+		while (!ady.fin() && !encontre) {
+			Vertice<String> v = ady.proximo().verticeDestino();
 
-			if (!marcas[ady.getPosicion()] && !ciudades.incluye(ady.dato()))
-				encontre = dfsExceptuando(ady, c2, marcas, camino, ciudades);
+			if (!marcas[v.getPosicion()] && !ciudades.incluye(v.dato()))
+				encontre = dfsExceptuando(v, c2, marcas, camino, ciudades);
 		}
-
-		if (!encontre) {
-			marcas[v.getPosicion()] = false; // es necesario?
+		marcas[vertice.getPosicion()] = false;
+		if (!encontre)
 			camino.eliminarEn(camino.tamanio());
-		}
 
 		return encontre;
 	}
 
 	public ListaGenerica<Vertice<String>> caminoMasCorto(String ciudad1, String ciudad2) {
+
+		// Retorna la lista de ciudades que forman el camino más corto para llegar de
+		// ciudad1 a ciudad2, si no existe camino retorna la lista vacía. (Las rutas
+		// poseen la distancia). (Sin tener en cuenta el combustible).
 
 		ListaGenerica<Vertice<String>> lista = new ListaEnlazadaGenerica<Vertice<String>>();
 		ListaGenerica<Vertice<String>> camino = new ListaEnlazadaGenerica<Vertice<String>>();
@@ -109,7 +119,7 @@ public class Mapa {
 
 	private void dfsMasCorto(Vertice<String> v, String c2, boolean[] marcas, ListaGenerica<Vertice<String>> lista,
 			ListaGenerica<Vertice<String>> camino, int distancia, int[] min) {
-		marcas[v.getPosicion()] = true;
+
 		camino.agregarFinal(v);
 		if (v.dato().equals(c2)) {
 			if (min[0] > distancia) {
@@ -117,23 +127,27 @@ public class Mapa {
 				min[0] = distancia;
 			}
 		} else {
+			marcas[v.getPosicion()] = true;
 			ListaGenerica<Arista<String>> adyacentes = mapaCiudades.listaDeAdyacentes(v);
 			adyacentes.comenzar();
 			while (!adyacentes.fin()) {
 				Arista<String> arista = adyacentes.proximo();
 				if (!marcas[arista.verticeDestino().getPosicion()]) {
-					distancia += arista.peso();
-					dfsMasCorto(arista.verticeDestino(), c2, marcas, lista, camino, distancia, min);
-
+					int d = distancia + arista.peso();
+					dfsMasCorto(arista.verticeDestino(), c2, marcas, lista, camino, d, min);
 				}
-
 			}
+			marcas[v.getPosicion()] = false;
 		}
-		marcas[v.getPosicion()] = false;
 		camino.eliminarEn(camino.tamanio());
 	}
 
 	public ListaGenerica<Vertice<String>> caminoSinCargarCombustible(String ciudad1, String ciudad2, int tanqueAuto) {
+
+		// Retorna la lista de ciudades que forman un camino para llegar de ciudad1 a
+		// ciudad2. El auto no debe quedarse sin combustible y no puede cargar. Si no
+		// existe camino retorna la lista vacía.
+
 		ListaGenerica<Vertice<String>> camino = new ListaEnlazadaGenerica<Vertice<String>>();
 		boolean[] marcas = new boolean[mapaCiudades.listaDeVertices().tamanio() + 1];
 
@@ -146,22 +160,24 @@ public class Mapa {
 
 	}
 
-	private boolean dfsSinCargarCombustible(Vertice<String> v1, String c2, boolean[] marcas,
+	private boolean dfsSinCargarCombustible(Vertice<String> vertice, String c2, boolean[] marcas,
 			ListaGenerica<Vertice<String>> camino, int tanqueAuto) {
-		marcas[v1.getPosicion()] = true;
 
-		camino.agregarFinal(v1);
-		if (v1.dato().equals(c2)) {
+		camino.agregarFinal(vertice);
+		if (vertice.dato().equals(c2)) {
 			return true;
 		}
-		ListaGenerica<Arista<String>> ady = mapaCiudades.listaDeAdyacentes(v1);
+		marcas[vertice.getPosicion()] = true;
+		ListaGenerica<Arista<String>> ady = mapaCiudades.listaDeAdyacentes(vertice);
+		ady.comenzar();
 		boolean llego = false;
 		while (!ady.fin() && !llego) {
 			Arista<String> a = ady.proximo();
-
-			if (a.peso() <= tanqueAuto && !marcas[a.verticeDestino().getPosicion()])
-				llego = dfsSinCargarCombustible(a.verticeDestino(), c2, marcas, camino, tanqueAuto - a.peso());
+			Vertice<String> v = a.verticeDestino();
+			if (!marcas[v.getPosicion()] && a.peso() <= tanqueAuto)
+				llego = dfsSinCargarCombustible(v, c2, marcas, camino, tanqueAuto - a.peso());
 		}
+		marcas[vertice.getPosicion()] = false;
 		if (!llego)
 			camino.eliminarEn(camino.tamanio());
 		return llego;
@@ -170,6 +186,11 @@ public class Mapa {
 
 	public ListaGenerica<Vertice<String>> caminoConMenorCargaDeCombustible(String ciudad1, String ciudad2,
 			int tanqueAuto) {
+		// Retorna la lista de ciudades que forman un camino para llegar de ciudad1 a
+		// ciudad2 teniendo en cuenta que el auto debe cargar la menor cantidad de
+		// veces. El auto no se debe quedar sin combustible en medio de una ruta, además
+		// puede completar su tanque al llegar a cualquier ciudad. Si no existe camino
+		// retorna la lista vacía.
 		ListaGenerica<Vertice<String>> camino = new ListaEnlazadaGenerica<Vertice<String>>();
 		ListaGenerica<Vertice<String>> mejorCamino = new ListaEnlazadaGenerica<Vertice<String>>();
 		boolean[] marcas = new boolean[mapaCiudades.listaDeVertices().tamanio() + 1];
@@ -185,36 +206,39 @@ public class Mapa {
 
 	}
 
-	private void dfsConMenorCargaDeCombustible(Vertice<String> v, String c2, boolean[] marcas,
+	private void dfsConMenorCargaDeCombustible(Vertice<String> vertice, String c2, boolean[] marcas,
 			ListaGenerica<Vertice<String>> caminoActual, ListaGenerica<Vertice<String>> mejorCamino, int tanqueLleno,
 			int tanqueActual, int cargas, int[] menorCarga) {
-		caminoActual.agregarFinal(v);
-		marcas[v.getPosicion()] = true;
-		if (v.dato().equals(c2)) {
+
+		caminoActual.agregarFinal(vertice);
+
+		if (vertice.dato().equals(c2)) {
 			if (cargas < menorCarga[0]) {
 				menorCarga[0] = cargas;
 				clonar(caminoActual, mejorCamino);
 			}
 		} else {
-			ListaGenerica<Arista<String>> ady = mapaCiudades.listaDeAdyacentes(v);
+			marcas[vertice.getPosicion()] = true;
+			ListaGenerica<Arista<String>> ady = mapaCiudades.listaDeAdyacentes(vertice);
 			ady.comenzar();
 			while (!ady.fin()) {
-				Arista<String> arista = ady.proximo();
-				Vertice<String> vertice = arista.verticeDestino();
-				if (!marcas[vertice.getPosicion()] && (arista.peso() <= tanqueLleno)) {
+				Arista<String> a = ady.proximo();
+				Vertice<String> v = a.verticeDestino();
+				if (!marcas[v.getPosicion()] && (a.peso() <= tanqueLleno)) {
 
-					if (tanqueActual < arista.peso()) {
+					if (tanqueActual < a.peso()) {
 
-						dfsConMenorCargaDeCombustible(vertice, c2, marcas, caminoActual, mejorCamino, tanqueLleno,
-								tanqueLleno - arista.peso(), cargas + 1, menorCarga);
+						dfsConMenorCargaDeCombustible(v, c2, marcas, caminoActual, mejorCamino, tanqueLleno,
+								tanqueLleno - a.peso(), cargas + 1, menorCarga);
 					} else
 
-						dfsConMenorCargaDeCombustible(vertice, c2, marcas, caminoActual, mejorCamino, tanqueLleno,
-								tanqueActual - arista.peso(), cargas, menorCarga);
+						dfsConMenorCargaDeCombustible(v, c2, marcas, caminoActual, mejorCamino, tanqueLleno,
+								tanqueActual - a.peso(), cargas, menorCarga);
 				}
 			}
+			marcas[vertice.getPosicion()] = false;
 		}
-		marcas[v.getPosicion()] = false;
+
 		caminoActual.eliminarEn(caminoActual.tamanio());
 	}
 

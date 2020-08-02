@@ -54,6 +54,7 @@ public class Parcial_18_07_2020 {
 	 * Para que sea el último nodo del camino, todos sus adyacentes no deben ser
 	 * alcanzables, ya que no hay dinero suficiente para pagar el peaje de alguna de
 	 * las ciudades adyacentes. Es decir que el recorrido hay que hacerlo postorden.
+	 * Podría hacerse preorden, pero estaría actualizando el mejor camino muchas veces.
 	 */
 	private void dfs(Grafo<String> ciudades, Vertice<String> v, boolean[] marcas, ListaGenerica<String> caminoActual,
 			int gastado, MejorRecorrido<String> mejor) {

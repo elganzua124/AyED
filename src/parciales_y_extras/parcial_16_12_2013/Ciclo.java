@@ -11,7 +11,7 @@ public class Ciclo<T> {
 
 	public Ciclo() {
 		ciclo = new ListaEnlazadaGenerica<T>();
-		peso = 0;
+		peso = -1;
 	}
 
 	public ListaGenerica<T> getCiclo() {
