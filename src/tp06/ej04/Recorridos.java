@@ -33,10 +33,10 @@ public class Recorridos<T> {
 	}
 
 	public ListaGenerica<Vertice<T>> bfs(Grafo<T> grafo) {
-		
+
 		ListaGenerica<Vertice<T>> resultado = new ListaEnlazadaGenerica<Vertice<T>>();
 		if (!grafo.esVacio()) {
-			
+
 			ListaGenerica<Vertice<T>> listaDeVertices = grafo.listaDeVertices();
 			int tam = listaDeVertices.tamanio();
 			boolean[] marcas = new boolean[tam + 1];
@@ -44,14 +44,14 @@ public class Recorridos<T> {
 			for (int i = 1; i <= tam; i++) {
 				Vertice<T> v = listaDeVertices.proximo();
 				if (!marcas[i]) {
-					bfs(grafo,v, marcas, resultado);
+					bfs(grafo, v, marcas, resultado);
 				}
 			}
 		}
 		return resultado;
 	}
 
-	private void bfs(Grafo<T> grafo,Vertice<T> vInicial, boolean[] visitados, ListaGenerica<Vertice<T>> resultado) {
+	private void bfs(Grafo<T> grafo, Vertice<T> vInicial, boolean[] visitados, ListaGenerica<Vertice<T>> resultado) {
 		ColaGenerica<Vertice<T>> cola = new ColaGenerica<Vertice<T>>();
 		cola.encolar(vInicial);
 		visitados[vInicial.getPosicion()] = true;
@@ -62,8 +62,9 @@ public class Recorridos<T> {
 			listaDeAdyacentes.comenzar();
 			while (!listaDeAdyacentes.fin()) {
 				Vertice<T> vSiguiente = listaDeAdyacentes.proximo().verticeDestino();
-				if (!visitados[vSiguiente.getPosicion()]) {
-					visitados[vSiguiente.getPosicion()] = true;
+				int j = vSiguiente.getPosicion();
+				if (!visitados[j]) {
+					visitados[j] = true;
 					cola.encolar(vSiguiente);
 				}
 			}
