@@ -109,19 +109,19 @@ public class Parcial2 {
 	public static void main(String[] args) {
 
 		Grafo<Ciudad> grafo = new GrafoImplListAdy<Ciudad>();
-		Parcial2 ciudades = new Parcial2();
+		Parcial2 parcial = new Parcial2();
 
-		Vertice<Ciudad> a = new VerticeImplListAdy<Ciudad>(ciudades.new Ciudad("Quilmes", 3));
-		Vertice<Ciudad> b = new VerticeImplListAdy<Ciudad>(ciudades.new Ciudad("La Plata", 1));
-		Vertice<Ciudad> c = new VerticeImplListAdy<Ciudad>(ciudades.new Ciudad("Pinamar", 0));
-		Vertice<Ciudad> d = new VerticeImplListAdy<Ciudad>(ciudades.new Ciudad("Moreno", 2));
-		Vertice<Ciudad> e = new VerticeImplListAdy<Ciudad>(ciudades.new Ciudad("Abasto", 4));
-		Vertice<Ciudad> f = new VerticeImplListAdy<Ciudad>(ciudades.new Ciudad("Carlos Keen", 2));
-		Vertice<Ciudad> g = new VerticeImplListAdy<Ciudad>(ciudades.new Ciudad("Cañuelas", 2));
-		Vertice<Ciudad> h = new VerticeImplListAdy<Ciudad>(ciudades.new Ciudad("Suipacha", 3));
-		Vertice<Ciudad> i = new VerticeImplListAdy<Ciudad>(ciudades.new Ciudad("Navarro", 1));
-		Vertice<Ciudad> j = new VerticeImplListAdy<Ciudad>(ciudades.new Ciudad("Saladillo", 2));
-		Vertice<Ciudad> k = new VerticeImplListAdy<Ciudad>(ciudades.new Ciudad("Lobos", 1));
+		Vertice<Ciudad> a = new VerticeImplListAdy<Ciudad>(parcial.new Ciudad("Quilmes", 3));
+		Vertice<Ciudad> b = new VerticeImplListAdy<Ciudad>(parcial.new Ciudad("La Plata", 1));
+		Vertice<Ciudad> c = new VerticeImplListAdy<Ciudad>(parcial.new Ciudad("Pinamar", 0));
+		Vertice<Ciudad> d = new VerticeImplListAdy<Ciudad>(parcial.new Ciudad("Moreno", 2));
+		Vertice<Ciudad> e = new VerticeImplListAdy<Ciudad>(parcial.new Ciudad("Abasto", 4));
+		Vertice<Ciudad> f = new VerticeImplListAdy<Ciudad>(parcial.new Ciudad("Carlos Keen", 2));
+		Vertice<Ciudad> g = new VerticeImplListAdy<Ciudad>(parcial.new Ciudad("Cañuelas", 2));
+		Vertice<Ciudad> h = new VerticeImplListAdy<Ciudad>(parcial.new Ciudad("Suipacha", 3));
+		Vertice<Ciudad> i = new VerticeImplListAdy<Ciudad>(parcial.new Ciudad("Navarro", 1));
+		Vertice<Ciudad> j = new VerticeImplListAdy<Ciudad>(parcial.new Ciudad("Saladillo", 2));
+		Vertice<Ciudad> k = new VerticeImplListAdy<Ciudad>(parcial.new Ciudad("Lobos", 1));
 
 		grafo.agregarVertice(a);
 		grafo.agregarVertice(b);
@@ -163,7 +163,7 @@ public class Parcial2 {
 		grafo.conectar(j, i, 1);
 		grafo.conectar(k, i, 0);
 
-		int rta = ciudades.resolver(grafo, "La Plata", "Suipacha");
+		int rta = parcial.resolver(grafo, "La Plata", "Suipacha");
 		System.out.print(rta);
 
 	}
