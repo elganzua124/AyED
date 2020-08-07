@@ -64,12 +64,13 @@ public class Parcial5 {
 		ListaGenerica<Arista<String>> ady = ciudades.listaDeAdyacentes(v);
 		ady.comenzar();
 
-		while (!ady.fin()) {
-			Vertice<String> vertice = ady.proximo().verticeDestino();
-			boolean dentroDeRadio = nivelActual + 1 <= radio;
+		if (++nivelActual <= radio) {
+			while (!ady.fin()) {
+				Vertice<String> vertice = ady.proximo().verticeDestino();
 
-			if (!marcas[vertice.getPosicion()] && dentroDeRadio)
-				dfs(ciudades, vertice, marcas, camino, evitarCiudadesContiguas, radio, nivelActual + 1);
+				if (!marcas[vertice.getPosicion()])
+					dfs(ciudades, vertice, marcas, camino, evitarCiudadesContiguas, radio, nivelActual);
+			}
 		}
 
 	}
@@ -100,21 +101,22 @@ public class Parcial5 {
 
 		int nivelActual = 0;
 
-		while (!cola.esVacia() && nivelActual <= radio) {
+		while (!cola.esVacia()) {
 			Vertice<String> vActual = cola.desencolar();
 
 			if (vActual != null) {
-
 				if (ciudadValida(ciudades, vActual, evitarCiudadesContiguas))
 					camino.agregarFinal(vActual.dato());
-				ListaGenerica<Arista<String>> listaDeAdyacentes = ciudades.listaDeAdyacentes(vActual);
-				listaDeAdyacentes.comenzar();
-				while (!listaDeAdyacentes.fin()) {
-					Vertice<String> vSiguiente = listaDeAdyacentes.proximo().verticeDestino();
-					int j = vSiguiente.getPosicion();
-					if (!marcas[j]) {
-						marcas[j] = true;
-						cola.encolar(vSiguiente);
+				if (nivelActual + 1 <= radio) {// para no encolar vertices innecesarios
+					ListaGenerica<Arista<String>> listaDeAdyacentes = ciudades.listaDeAdyacentes(vActual);
+					listaDeAdyacentes.comenzar();
+					while (!listaDeAdyacentes.fin()) {
+						Vertice<String> vSiguiente = listaDeAdyacentes.proximo().verticeDestino();
+						int j = vSiguiente.getPosicion();
+						if (!marcas[j]) {
+							marcas[j] = true;
+							cola.encolar(vSiguiente);
+						}
 					}
 				}
 			} else if (++nivelActual <= radio)
