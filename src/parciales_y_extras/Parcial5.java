@@ -18,7 +18,7 @@ import estructuras.listas.ListaGenerica;
  * distancia "radio" de una ciudad "origen" excluyendo las que son adyacentes
  * a alguna de las indicadas en "evitarCiudadesContiguas". Para cada ciudad
  * se conoce el nombre.
- 
+ *
  *
  * En este ejemplo, considerando "origen" a Moreno, y "evitarCiudadesContiguas"
  * a La Plata y Lobos, considerando adem'as un radio 3.
@@ -28,12 +28,12 @@ import estructuras.listas.ListaGenerica;
  *   (porque es adyacente a La Plata), La Plata (porque se debe evitar), Navarro
  *   (porque es adyacente a Lobos), Pinamar (porque es adyacente a La Plata),
  *   Lobos (porque se debe evitar), Saladillo (porque está fuera del radio).
- *   
- *   
- *   
- *   
+ *
+ *
+ *
+ *
  * NOTA: Implementé los recorridos DFS y BFS (el correcto y más eficiente).
- *   
+ *
  */
 
 public class Parcial5 {
@@ -57,7 +57,7 @@ public class Parcial5 {
 	private void dfs(Grafo<String> ciudades, Vertice<String> v, boolean[] marcas, ListaGenerica<String> camino,
 			ListaGenerica<String> evitarCiudadesContiguas, int radio, int nivelActual) {
 
-		if (ciudadValida(ciudades, v, evitarCiudadesContiguas) && !camino.incluye(v.dato()))
+		if (ciudadValida(ciudades, v, evitarCiudadesContiguas))
 			camino.agregarFinal(v.dato());
 
 		marcas[v.getPosicion()] = true;
@@ -71,7 +71,6 @@ public class Parcial5 {
 			if (!marcas[vertice.getPosicion()] && dentroDeRadio)
 				dfs(ciudades, vertice, marcas, camino, evitarCiudadesContiguas, radio, nivelActual + 1);
 		}
-		marcas[v.getPosicion()] = false;
 
 	}
 
