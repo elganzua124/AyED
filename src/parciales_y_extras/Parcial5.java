@@ -32,11 +32,7 @@ import estructuras.listas.ListaGenerica;
  *
  *
  *
- * NOTA 1: Implementé los recorridos DFS y BFS.
- * 
- * NOTA 2: Usar DFS no es lo correcto, por ejemplo, si se conectara Moreno con
- * Navarro, Saladillo debería agregarse a la lista de retorno, pero con DFS
- * no aparece.
+ * NOTA: Implementé los recorridos DFS y BFS.
  *
  */
 
@@ -64,11 +60,12 @@ public class Parcial5 {
 		if (ciudadValida(ciudades, v, evitarCiudadesContiguas))
 			camino.agregarFinal(v.dato());
 
-		marcas[v.getPosicion()] = true;
+		
 		ListaGenerica<Arista<String>> ady = ciudades.listaDeAdyacentes(v);
 		ady.comenzar();
 
 		if (++nivelActual <= radio) {
+			marcas[v.getPosicion()] = true;
 			while (!ady.fin()) {
 				Vertice<String> vertice = ady.proximo().verticeDestino();
 
@@ -111,7 +108,7 @@ public class Parcial5 {
 			if (vActual != null) {
 				if (ciudadValida(ciudades, vActual, evitarCiudadesContiguas))
 					camino.agregarFinal(vActual.dato());
-				if (nivelActual + 1 <= radio) {// para no encolar vertices innecesarios
+				if (nivelActual < radio) {
 					ListaGenerica<Arista<String>> listaDeAdyacentes = ciudades.listaDeAdyacentes(vActual);
 					listaDeAdyacentes.comenzar();
 					while (!listaDeAdyacentes.fin()) {
@@ -206,10 +203,6 @@ public class Parcial5 {
 		ciudades.conectar(i, k);
 		ciudades.conectar(j, i);
 		ciudades.conectar(k, i);
-
-		// El recorrido DFS es erróneo cuando se une Moreno con Navarro:
-		// ciudades.conectar(d, i);
-		// ciudades.conectar(i, d);
 
 		Parcial5 parcial = new Parcial5();
 
