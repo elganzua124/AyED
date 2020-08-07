@@ -21,7 +21,7 @@ import estructuras.listas.ListaGenerica;
  *
  *
  * En este ejemplo, considerando "origen" a Moreno, y "evitarCiudadesContiguas"
- * a La Plata y Lobos, considerando adem'as un radio 3.
+ * a La Plata y Lobos, considerando además un radio 3.
  * 
  * - Se debe retornar: Moreno (es el origen), Carlos Keen, Suipacha, Cañuelas.
  * - No se deben retornar: Abasto (porque es adyacente a La Plata), Quilmes
@@ -32,7 +32,11 @@ import estructuras.listas.ListaGenerica;
  *
  *
  *
- * NOTA: Implementé los recorridos DFS y BFS (el correcto y más eficiente).
+ * NOTA 1: Implementé los recorridos DFS y BFS.
+ * 
+ * NOTA 2: Usar DFS no es lo correcto, por ejemplo, si se conectara Moreno con
+ * Navarro, Saladillo debería agregarse a la lista de retorno, pero con DFS
+ * no aparece.
  *
  */
 
@@ -202,6 +206,10 @@ public class Parcial5 {
 		ciudades.conectar(i, k);
 		ciudades.conectar(j, i);
 		ciudades.conectar(k, i);
+
+		// El recorrido DFS es erróneo cuando se une Moreno con Navarro:
+		// ciudades.conectar(d, i);
+		// ciudades.conectar(i, d);
 
 		Parcial5 parcial = new Parcial5();
 
