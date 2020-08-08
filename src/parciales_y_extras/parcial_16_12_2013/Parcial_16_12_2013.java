@@ -53,31 +53,21 @@ public class Parcial_16_12_2013 {
 			Ciclo<T> mejorCiclo, int peso) {
 
 		camino.agregarFinal(vertice.dato());
-
-		boolean es_primer_vertice = (vertice.dato().equals(camino.elemento(1)));
-
-		if (camino.tamanio() == 1)
-			mejorCiclo.cambiarCiclo(camino, peso);
-		else if (es_primer_vertice) {
-			if (peso > mejorCiclo.getPeso())
-				mejorCiclo.cambiarCiclo(camino, peso);
-			camino.eliminarEn(camino.tamanio());
-			return;
-
-		}
-
-		marcas[vertice.getPosicion()] = !es_primer_vertice;
+		marcas[vertice.getPosicion()] = true;
 		ListaGenerica<Arista<T>> ady = grafo.listaDeAdyacentes(vertice);
-
 		ady.comenzar();
 		while (!ady.fin()) {
 			Arista<T> arista = ady.proximo();
 			Vertice<T> v = arista.verticeDestino();
+			int p = peso + arista.peso();
+			boolean es_primer_vertice = (v.dato().equals(camino.elemento(1)));
+			if (es_primer_vertice && p > mejorCiclo.getPeso()) {
+				camino.agregarFinal(v.dato());
+				mejorCiclo.cambiarCiclo(camino, p);
+				camino.eliminarEn(camino.tamanio());
 
-			if (!marcas[v.getPosicion()]) {
-				int p = peso + arista.peso();
+			} else if (!marcas[v.getPosicion()])
 				dfs(grafo, v, camino, marcas, mejorCiclo, p);
-			}
 		}
 
 		marcas[vertice.getPosicion()] = false;
