@@ -41,11 +41,8 @@ public class Parcial_16_12_2013 {
 
 			boolean[] marcas = new boolean[grafo.listaDeVertices().tamanio() + 1];
 			ListaGenerica<T> camino = new ListaEnlazadaGenerica<T>();
-
 			dfs(grafo, vertice, camino, marcas, mejorCiclo, 0);
-
 		}
-
 		return mejorCiclo;
 	}
 
