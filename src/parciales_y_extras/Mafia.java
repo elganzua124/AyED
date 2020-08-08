@@ -110,6 +110,10 @@ public class Mafia {
 			if (v.dato().nombre().equals(ciudad))
 				return v;
 		}
+
+		if (vertices.fin())
+			return null;
+
 		return v;
 
 	}

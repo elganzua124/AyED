@@ -36,7 +36,7 @@ import estructuras.listas.ListaGenerica;
  * 
  *         - En caso de no existir un camino posible, deve devolver el valor más
  *         adecuado que se ajuste a lo solicitado.
- *         
+ * 
  *         - Use los métodos de Grafo y Listas visto en clase.
  * 
  */
@@ -94,10 +94,10 @@ public class Parcial4 {
 				incluye = dfs(ady, destino, marcas, camino, pasandoPor);
 			}
 		}
-		
+
 		marcas[v.getPosicion()] = false;
-		
-		if (!incluye) 
+
+		if (!incluye)
 			camino.eliminarEn(camino.tamanio());
 
 		return incluye;
@@ -113,6 +113,10 @@ public class Parcial4 {
 			if (v.dato().equals(ciudad))
 				return v;
 		}
+
+		if (vertices.fin())
+			return null;
+
 		return v;
 
 	}

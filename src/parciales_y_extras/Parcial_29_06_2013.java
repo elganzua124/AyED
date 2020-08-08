@@ -87,6 +87,9 @@ public class Parcial_29_06_2013 {
 				return v;
 		}
 
+		if (vertices.fin())
+			return null;
+
 		return v;
 	}
 

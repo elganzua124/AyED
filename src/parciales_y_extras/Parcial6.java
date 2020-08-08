@@ -62,6 +62,10 @@ public class Parcial6 {
 			if (v.dato().equals(dato))
 				return v;
 		}
+		
+		if (vertices.fin())
+			return null;
+		
 		return v;
 	}
 
