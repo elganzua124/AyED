@@ -58,7 +58,7 @@ public class Parcial_08_08_2020 {
 		/*
 		 * Piden el conjunto de lugares, asi que no es necesario eliminar ni desmarcar
 		 * vertices en la lista, sino agregar a la lista de lugares tantos vertices no
-		 * marcados pueda (no me alejo mucho del origen).
+		 * marcados pueda (no me alejo del origen más del limite de cuadras).
 		 * 
 		 */
 

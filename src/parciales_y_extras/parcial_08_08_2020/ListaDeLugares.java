@@ -19,8 +19,6 @@ public class ListaDeLugares {
 	}
 
 	public int tiempoTotal() {
-		if (listaDeLugares.esVacia())
-			return 0;
 		int t = 0;
 		listaDeLugares.comenzar();
 		while (!listaDeLugares.fin())
@@ -39,7 +37,7 @@ public class ListaDeLugares {
 	@Override
 	public String toString() {
 
-		String str = "Lista de lugares:\n\n";
+		String str = "";
 
 		listaDeLugares.comenzar();
 		while (!listaDeLugares.fin())
