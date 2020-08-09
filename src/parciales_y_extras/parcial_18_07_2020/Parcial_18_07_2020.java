@@ -50,14 +50,18 @@ public class Parcial_18_07_2020 {
 		return mejor;
 	}
 
-	/*
-	 * Para que sea el último nodo del camino, todos sus adyacentes no deben ser
-	 * alcanzables, ya que no hay dinero suficiente para pagar el peaje de alguna de
-	 * las ciudades adyacentes. Es decir que el recorrido hay que hacerlo postorden.
-	 * Podría hacerse preorden, pero estaría actualizando el mejor camino muchas veces.
-	 */
 	private void dfs(Grafo<String> ciudades, Vertice<String> v, boolean[] marcas, ListaGenerica<String> caminoActual,
 			int gastado, MejorRecorrido<String> mejor) {
+
+		/*
+		 * Observación: Mi versión es más eficiente que evaluar el caminoActual al
+		 * comienzo (preorden). Razón: si ( caminoActual.tamanio() >
+		 * mejor.getRecorrido().tamanio() ) se evaluase al comienzo, estaría
+		 * actualizando el mejor recorrido muchas veces, cuando aun no se llegó al final
+		 * de caminoActual. En cambio al hacerse ni bien se vuelve de la recursión,
+		 * evaluamos caminoActual en su estado final.
+		 * 
+		 */
 
 		marcas[v.getPosicion()] = true;
 		caminoActual.agregarFinal(v.dato());
@@ -74,8 +78,7 @@ public class Parcial_18_07_2020 {
 			if (!marcas[vertice.getPosicion()] && aGastar <= mejor.maxMonto()) {
 
 				dfs(ciudades, vertice, marcas, caminoActual, aGastar, mejor);
-				// ya evalué todos mis adyacentes y caminoActual
-				// tiene el mejor candidato a evaluar
+
 				if (caminoActual.tamanio() > mejor.getRecorrido().tamanio())
 					mejor.cambiarRecorrido(caminoActual, aGastar);
 				else if (caminoActual.tamanio() == mejor.getRecorrido().tamanio())
@@ -87,6 +90,7 @@ public class Parcial_18_07_2020 {
 		}
 
 		marcas[v.getPosicion()] = false;
+
 	}
 
 	private <T> Vertice<T> buscarSitio(Grafo<T> grafo, String ciudad) {
