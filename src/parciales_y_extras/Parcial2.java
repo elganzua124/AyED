@@ -102,6 +102,10 @@ public class Parcial2 {
 			if (v.dato().getNombre().equals(nombre))
 				return v;
 		}
+		
+		if (vertices.fin())
+			return null;
+		
 		return v;
 
 	}

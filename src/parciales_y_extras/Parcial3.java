@@ -121,6 +121,10 @@ public class Parcial3 {
 			if (v.dato().getProfundidad() == 0)
 				return v;
 		}
+		
+		if (vertices.fin())
+			return null;
+		
 		return v;
 
 	}

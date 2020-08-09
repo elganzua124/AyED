@@ -46,8 +46,8 @@ public class VisitaOslo {
 			int tiempo = tiempoActual + arista.peso();
 
 			if (!marcas[ady.getPosicion()] && !lugaresRestringidos.incluye(ady.dato())) {
-				
-				if(camino.incluye(ady.dato()))
+
+				if (camino.incluye(ady.dato()))
 					System.out.print("maal");
 				if (tiempo <= maxTiempo)
 					encontre = dfs(ady, destino, marcas, camino, maxTiempo, tiempo, lugaresRestringidos);
@@ -71,6 +71,10 @@ public class VisitaOslo {
 			if (v.dato().equals(lugar))
 				return v;
 		}
+
+		if (vertices.fin())
+			return null;
+
 		return v;
 
 	}

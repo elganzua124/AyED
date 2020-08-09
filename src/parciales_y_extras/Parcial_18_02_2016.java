@@ -116,6 +116,9 @@ public class Parcial_18_02_2016 {
 				return v;
 		}
 
+		if (vertices.fin())
+			return null;
+
 		return v;
 	}
 

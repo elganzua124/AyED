@@ -103,6 +103,9 @@ public class Parcial_18_07_2020 {
 				return v;
 		}
 
+		if (vertices.fin())
+			return null;
+		
 		return v;
 	}
 

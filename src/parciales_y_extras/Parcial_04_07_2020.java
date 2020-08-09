@@ -97,6 +97,10 @@ public class Parcial_04_07_2020 {
 			if (v.dato().equals(ciudad))
 				return v;
 		}
+
+		if (vertices.fin())
+			return null;
+
 		return v;
 
 	}

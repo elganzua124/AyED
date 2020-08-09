@@ -136,6 +136,10 @@ public class Parcial5 {
 			if (v.dato().equals(ciudad))
 				return v;
 		}
+		
+		if (vertices.fin())
+			return null;
+		
 		return v;
 	}
 
